@@ -46,7 +46,7 @@ public final class ChallangesCMD extends Command {
     private Config challengeFile = null;
 
     public ChallangesCMD(ASkyBlock ev) {
-        super("challenges", "Challange yourself for some big prize", "\u00a77<parameters>", new String[]{"c", "chall", "ch"});
+        super("challenges", "Challange yourself for some big prize", "\u00a77<parameters>", new String[]{"chall"});
         this.plugin = ev;
         saveDefaultChallengeConfig();
         reloadChallengeConfig();
@@ -70,9 +70,9 @@ public final class ChallangesCMD extends Command {
         switch (args[0]) {
             case "help":
                 p.sendMessage("§d--- §aChallanges help page §e1 §aof §e1 §d---");
-                p.sendMessage("§aUse /c <name> to view information about a challenge.");
-                p.sendMessage("§aUse /c complete <name> to attempt to complete that challenge.");
-                p.sendMessage("§aUse /c list <page> to view all information about the challenge.");
+                p.sendMessage("§aUse /chall <name> to view information about a challenge.");
+                p.sendMessage("§aUse /chall complete <name> to attempt to complete that challenge.");
+                p.sendMessage("§aUse /chall list <page> to view all information about the challenge.");
                 break;
             case "list":
                 if (args.length == 2) {
@@ -83,7 +83,7 @@ public final class ChallangesCMD extends Command {
                 break;
             case "complete":
                 if (args.length != 2) {
-                    p.sendMessage(plugin.getPrefix() + "§eUsage: /c complete [challenge name]");
+                    p.sendMessage(plugin.getPrefix() + "§eUsage: /chall complete [challenge name]");
                     break;
                 }
                 if (checkIfCanCompleteChallenge(p, args[1].toLowerCase())) {
@@ -192,7 +192,7 @@ public final class ChallangesCMD extends Command {
             i++;
         }
         if (!names.get(numbers).isEmpty()) {
-            sender.sendMessage(TextFormat.GREEN + "Type " + TextFormat.YELLOW + "/c list " + (numbers + 1) + TextFormat.GREEN + " to see the next page.");
+            sender.sendMessage(TextFormat.GREEN + "Type " + TextFormat.YELLOW + "/chall list " + (numbers + 1) + TextFormat.GREEN + " to see the next page.");
         }
         names.clear();
     }
