@@ -125,7 +125,7 @@ public class Panel implements Listener {
                 FormResponseSimple responses = panelChallenges.getResponse();
 
                 String responseType = responses.getClickedButton().getText();
-                plugin.getServer().dispatchCommand(p, "c complete " + responseType);
+                plugin.getServer().dispatchCommand(p, "chall complete " + responseType);
                 break;
             case TYPE_HOMES:
                 // Check if the player closed this form
