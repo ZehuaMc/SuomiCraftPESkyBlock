@@ -172,12 +172,7 @@ public class IslandBlock extends BlockMinecraftId {
                             exx.printStackTrace();
                         }
                     }
-                }); // Format for chest items is:
-                // id = short value of item id
-                // Damage = short value of item damage
-                // Count = the number of items
-                // Slot = the slot in the chest
-                // inventory
+                });
             }
         } catch (Exception e) {
             Utils.send("Could not parse schematic file item, skipping!");
@@ -202,43 +197,6 @@ public class IslandBlock extends BlockMinecraftId {
 
         while (!blockLoc.getLevel().getChunk((int) blockLoc.getX() >> 4, (int) blockLoc.getZ() >> 4).isLoaded()) {
             loadChunkAt(loc);
-        }
-
-        while (blockLoc.getLevel().getChunk((int) blockLoc.getX() >> 4, (int) blockLoc.getZ() >> 4).isLoaded()) {
-            if (Block.get(typeId, data).getId() == Block.CHEST) {
-                BaseFullChunk chunk = blockLoc.getLevel().getChunk(loc.getFloorX() >> 4, loc.getFloorZ() >> 4);
-                cn.nukkit.nbt.tag.CompoundTag nbt = new cn.nukkit.nbt.tag.CompoundTag()
-                        .putList(new cn.nukkit.nbt.tag.ListTag<>("Items"))
-                        .putString("id", BlockEntity.CHEST)
-                        .putInt("x", (int) loc.x)
-                        .putInt("y", (int) loc.y)
-                        .putInt("z", (int) loc.z);
-                BlockEntityChest e = (BlockEntityChest) BlockEntity.createBlockEntity(
-                        BlockEntity.CHEST,
-                        chunk,
-                        nbt);
-
-                Map<Integer, Item> itemses = new HashMap<>();
-                itemses.put(0, Item.get(Item.ICE, 0, 2));
-                itemses.put(1, Item.get(Item.BUCKET, 10, 1));
-                itemses.put(2, Item.get(Item.BONE, 0, 1));
-                itemses.put(3, Item.get(Item.SUGARCANE, 0, 1));
-                itemses.put(4, Item.get(Item.PUMPKIN_SEEDS, 0, 1));
-                itemses.put(5, Item.get(Item.MELON, 0, 1));
-                itemses.put(6, Item.get(Item.COAL, 0, 1));
-                itemses.put(7, Item.get(Item.STEAK, 0, 1));
-                itemses.put(8, Item.get(Item.SEEDS, 0, 3));
-                itemses.put(9, Item.get(Item.CACTUS, 0, 1));
-
-                e.getInventory().clearAll();
-                e.getInventory().setContents(itemses);
-
-                loadChunkAt(loc);
-
-                blockLoc.getLevel().addBlockEntity(e);
-                e.spawnToAll();
-            }
-            break;
         }
 
     }

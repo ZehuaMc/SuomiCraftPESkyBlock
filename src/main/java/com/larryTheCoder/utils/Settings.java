@@ -26,9 +26,6 @@ import java.util.*;
  * @author Adam Matthew
  */
 public class Settings {
-
-    public static GameType GAMETYPE = GameType.SKYBLOCK;
-
     // system variables
     public static boolean useSchematicPanel;
     public static boolean chooseIslandRandomly;

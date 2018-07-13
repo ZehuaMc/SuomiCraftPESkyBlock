@@ -66,39 +66,10 @@ public class Messages {
     }
 
     public void saveMessages() {
-        if (messageStore == null) {
-            return;
-        }
-        try {
-            final HashMap<String, Object> offlineMessages = new HashMap<>();
-            messages.keySet().stream().forEach((p) -> {
-                offlineMessages.put(p.toString(), messages.get(p));
-            });
-            messageStore.set("messages", offlineMessages);
-            Utils.saveYamlFile(messageStore, "messages.yml");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public boolean loadMessages() {
-        try {
-            messageStore = Utils.loadYamlFile("messages.yml");
-            if (messageStore.getSections("messages") == null) {
-            }
-            HashMap<String, Object> temp = messageStore.getSections("messages");
-            temp.keySet().stream().forEach((s) -> {
-                List<String> messageList = messageStore.getStringList("messages." + s);
-                if (!messageList.isEmpty()) {
-                    messages.put(s, messageList);
-                }
-            });
-
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+        return true;
     }
 
     /**

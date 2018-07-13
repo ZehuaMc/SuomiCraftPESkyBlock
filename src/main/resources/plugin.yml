@@ -1,9 +1,9 @@
 name: "ASkyBlock"
-version: "0.4"
+version: "0.5"
 api: ["1.0.0"]
 main: com.larryTheCoder.ASkyBlock
 load: POSTWORLD
-author: "Adam Matthew, Nukkit Coders"
+author: "Adam Matthew, Nukkit Coders, PetteriM1"
 depend:
   - DbLib
 softdepend:
@@ -20,7 +20,7 @@ permissions:
      description: "SkyBlock main command"
     # Island team chatting command
     is.command.teamChat:
-     default: true
+     default: op
      description: "Enable chatting with team"
     # Island messages command
     is.command.message:
@@ -33,7 +33,7 @@ permissions:
     # Island leave permission
     is.command.leave:
      default: true
-     description: "leave island"
+     description: "Leave island"
     # Message language (this is what I am waiting for!)
     is.command.lang:
      default: true

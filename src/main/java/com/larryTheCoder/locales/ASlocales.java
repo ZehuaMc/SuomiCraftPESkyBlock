@@ -214,13 +214,13 @@ public final class ASlocales {
                 //locale.setDefaults(defLocale);
             } else {
                 // Use the default file
-                localeFile = new File(plugin.getDataFolder() + File.separator + "locale", "locale.yml");
+                localeFile = new File(plugin.getDataFolder() + File.separator + "locale", "en-US.yml");
                 if (localeFile.exists()) {
                     locale = new Config(localeFile, Config.YAML);
                 } else // Look for defaults in the jar
-                    if (plugin.getResource("locale/locale.yml") != null) {
-                        plugin.saveResource("locale/locale.yml", true);
-                        localeFile = new File(plugin.getDataFolder() + File.separator + "locale", "locale.yml");
+                    if (plugin.getResource("locale/en-US.yml") != null) {
+                        plugin.saveResource("locale/en-US.yml", true);
+                        localeFile = new File(plugin.getDataFolder() + File.separator + "locale", "en-US.yml");
                         locale = new Config(localeFile, Config.YAML);
                     } else {
                         plugin.getLogger().emergency("Could not find any locale file!");

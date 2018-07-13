@@ -35,8 +35,6 @@ import com.larryTheCoder.locales.ASlocales;
 import com.larryTheCoder.schematic.SchematicHandler;
 import com.larryTheCoder.storage.IslandData;
 import com.larryTheCoder.storage.WorldSettings;
-import com.larryTheCoder.task.TaskManager;
-import com.larryTheCoder.task.UpdateBiomeTask;
 import com.larryTheCoder.utils.Settings;
 
 import java.util.ArrayList;
@@ -89,8 +87,6 @@ public class Panel implements Listener {
                 int responseId = 1;
                 String islandName = response.getInputResponse(responseId++);
 
-                String worldName = response.getDropdownResponse(responseId++).getElementContent(); // Dropdown respond
-
                 // 6 - 5
                 // The island schematic ID respond
                 int id = 1; // Keep this 1 so they wont be inside of my UN-FINISHED island
@@ -103,10 +99,8 @@ public class Panel implements Listener {
                 }
                 // Nope it just a Label
                 responseId++;
-                boolean locked = response.getToggleResponse(responseId++);
-                boolean teleport = response.getToggleResponse(responseId);
 
-                plugin.getIsland().createIsland(p, id, worldName, islandName, locked, Biome.getBiome("PLAINS"), teleport);
+                plugin.getIsland().createIsland(p, id, "SkyBlock", islandName, true, Biome.getBiome("PLAINS"));
                 panelDataId.remove(formId);
                 break;
             // Challenges data
@@ -141,7 +135,7 @@ public class Panel implements Listener {
 
                 int responseHome = homeResponse.getClickedButtonId();
                 p.sendMessage(plugin.getLocale(p).hangInThere);
-                plugin.getGrid().homeTeleport(p, responseHome);
+                plugin.getGrid().homeTeleport(p, responseHome, false);
                 break;
             case FIRST_TIME_SETTING:
                 // Check if the player closed this form
@@ -185,7 +179,6 @@ public class Panel implements Listener {
                 }
                 if (!pd.getBiome().equalsIgnoreCase(biome.getName())) {
                     pd.setBiome(biome.getName());
-                    TaskManager.runTask(new UpdateBiomeTask(plugin, pd, p));
                 }
                 break;
             case FIRST_TIME_DELETE:
@@ -277,9 +270,6 @@ public class Panel implements Listener {
         }
 
         panelIsland.addElement(new ElementLabel(getLocale(player).panelIslandDefault));
-        panelIsland.addElement(new ElementToggle("Locked", false));
-        panelIsland.addElement(new ElementToggle("Teleport to world", true));
-        //panelIsland.addElement(new ElementDropdown("Biome type", getBiomes(), 1));
 
         int id = player.showFormWindow(panelIsland);
         panelDataId.put(id, PanelType.TYPE_ISLAND);
@@ -355,7 +345,6 @@ public class Panel implements Listener {
         settingForm.addElement(new ElementLabel(getLocale(p).panelSettingHeader));
         settingForm.addElement(new ElementToggle("Locked", pd.isLocked()));
         settingForm.addElement(new ElementInput("Island Name", "", pd.getName()));
-        //settingForm.addElement(new ElementDropdown("Biome type", getBiomes(), 1));
         mapIslandId.put(p, pd.getId());
 
         int id = p.showFormWindow(settingForm);

@@ -46,7 +46,7 @@ public class BlockMinecraftId {
         POT_ITEM_LISTS.put("minecraft:tallgrass", Item.TALL_GRASS);
 
         // Establish the World Edit to Material look up
-        WETOME.put("ARMORSTAND", 0);
+        WETOME.put("ARMORSTAND", Item.ARMOR_STAND);
         WETOME.put("ACACIA_DOOR", Item.ACACIA_DOOR);
         WETOME.put("BIRCH_DOOR", Item.BIRCH_DOOR);
         WETOME.put("BIRCH_STAIRS", Item.BIRCH_WOOD_STAIRS);

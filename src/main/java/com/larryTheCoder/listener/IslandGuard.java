@@ -22,7 +22,6 @@ import cn.nukkit.block.Block;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.entity.item.EntityMinecartTNT;
 import cn.nukkit.entity.item.EntityPrimedTNT;
-import cn.nukkit.entity.item.EntityVehicle;
 import cn.nukkit.entity.mob.EntityCreeper;
 import cn.nukkit.entity.projectile.EntityProjectile;
 import cn.nukkit.event.EventHandler;
@@ -33,7 +32,6 @@ import cn.nukkit.event.entity.EntityDamageByEntityEvent;
 import cn.nukkit.event.entity.EntityExplodeEvent;
 import cn.nukkit.event.inventory.CraftItemEvent;
 import cn.nukkit.event.player.*;
-import cn.nukkit.event.potion.PotionCollideEvent;
 import cn.nukkit.event.vehicle.VehicleMoveEvent;
 import cn.nukkit.item.Item;
 import cn.nukkit.level.Level;
@@ -265,126 +263,6 @@ public class IslandGuard implements Listener {
         }
     }
 
-    /**
-     * Adds island lock function
-     *
-     * @param e
-     */
-    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
-    public void onPlayerMove(final PlayerMoveEvent e) {
-        if (!e.getPlayer().isAlive()) {
-            return;
-        }
-        if (!inWorld(e.getPlayer())) {
-            return;
-        }
-        if (plugin.getGrid() == null) {
-            return;
-        }
-        // Only do something if there is a definite x or z movement
-        if (e.getTo().getFloorX() - e.getFrom().getFloorX() == 0 && e.getTo().getFloorZ() - e.getFrom()
-            .getFloorZ() == 0) {
-            return;
-        }
-        final IslandData islandTo = plugin.getGrid().getProtectedIslandAt(e.getTo());
-        // Announcement entering
-        final IslandData islandFrom = plugin.getGrid().getProtectedIslandAt(e.getFrom());
-        Player p = e.getPlayer();
-        // Only says something if there is a change in islands
-        /*
-         * Situations:
-         * islandTo == null && islandFrom != null - exit
-         * islandTo == null && islandFrom == null - nothing
-         * islandTo != null && islandFrom == null - enter
-         * islandTo != null && islandFrom != null - same PlayerIsland or teleport?
-         * islandTo == islandFrom
-         */
-//        deb.debug("islandTo = " + islandTo);
-//        deb.debug("islandFrom = " + islandFrom);
-        if (islandTo != null && (islandTo.getOwner() != null || islandTo.isSpawn())) {
-            // Lock check
-            if (islandTo.isLocked()) {
-                if (!islandTo.getMembers().contains(p.getName()) && !p.isOp()
-                    && !p.hasPermission("is.mod.bypassprotect")
-                    && !p.hasPermission("is.mod.bypasslock")) {
-                    if (p.riding != null) {
-                        // Dismount
-                        ((EntityVehicle) p.riding).mountEntity(p);
-                        e.setCancelled(true);
-                    } else {
-                        Vector3 v = p.subtract(islandTo.getCenter()).normalize();
-                        v.x *= 1.2;
-                        v.z *= 1.2;
-                        p.setMotion(v);
-                    }
-                    return;
-                }
-            }
-        }
-
-        if (islandTo != null && islandFrom == null && (islandTo.getOwner() != null || islandTo.isSpawn())) {
-            // Entering
-            if (islandTo.isLocked()) {
-                p.sendMessage(plugin.getPrefix() + TextFormat.RED + "This island is locked");
-            }
-            if (islandTo.isSpawn()) {
-                if (islandTo.getIgsFlag(IslandData.SettingsFlag.ENTER_EXIT_MESSAGES)) {
-                    p.sendMessage(plugin.getPrefix() + TextFormat.GREEN + "Entering spawn area");
-                }
-            } else {
-                if (islandTo.getIgsFlag(IslandData.SettingsFlag.ENTER_EXIT_MESSAGES)) {
-                    p.sendMessage(plugin.getPrefix() + TextFormat.GREEN + "Entering " + islandTo.getName() + "'s island");
-                }
-            }
-            // Fire entry event
-            final IslandEnterEvent event = new IslandEnterEvent(p, islandTo, e.getTo());
-            plugin.getServer().getPluginManager().callEvent(event);
-        } else if (islandTo == null && islandFrom != null && (islandFrom.getOwner() != null || islandFrom.isSpawn())) {
-            // Leaving
-            if (islandFrom.isSpawn()) {
-                // Leaving
-                if (islandFrom.getIgsFlag(IslandData.SettingsFlag.ENTER_EXIT_MESSAGES)) {
-                    p.sendMessage(plugin.getPrefix() + TextFormat.GREEN + "Leaving spawn area");
-                }
-
-            } else {
-                if (islandFrom.getIgsFlag(IslandData.SettingsFlag.ENTER_EXIT_MESSAGES)) {
-                    p.sendMessage(plugin.getPrefix() + TextFormat.GREEN + "Leaving " + islandFrom.getName() + "'s island");
-                }
-
-            }
-            // Fire exit event
-            final IslandExitEvent event = new IslandExitEvent(p, islandFrom, e.getFrom());
-            plugin.getServer().getPluginManager().callEvent(event);
-        } else if (islandTo != null && islandFrom != null && !islandTo.equals(islandFrom)) {
-            // Adjacent islands or overlapping protections
-            if (islandFrom.isSpawn()) {
-                // Leaving
-                if (islandFrom.getIgsFlag(IslandData.SettingsFlag.ENTER_EXIT_MESSAGES)) {
-                    p.sendMessage(plugin.getPrefix() + TextFormat.GREEN + "Leaving spawn area");
-                }
-            } else if (islandFrom.getOwner() != null) {
-                if (islandFrom.getIgsFlag(IslandData.SettingsFlag.ENTER_EXIT_MESSAGES)) {
-                    p.sendMessage(plugin.getPrefix() + TextFormat.GREEN + "Leaving " + islandFrom.getName() + "'s island");
-                }
-            }
-            if (islandTo.isSpawn()) {
-                if (islandTo.getIgsFlag(IslandData.SettingsFlag.ENTER_EXIT_MESSAGES)) {
-                    p.sendMessage(plugin.getPrefix() + TextFormat.GREEN + "Entering spawn area");
-                }
-            } else if (islandTo.getOwner() != null) {
-                if (islandTo.getIgsFlag(IslandData.SettingsFlag.ENTER_EXIT_MESSAGES)) {
-                    p.sendMessage(plugin.getPrefix() + TextFormat.GREEN + "Entering " + islandTo.getName() + "'s island");
-                }
-            }
-            // Fire exit event
-            final IslandExitEvent event = new IslandExitEvent(p, islandFrom, e.getFrom());
-            plugin.getServer().getPluginManager().callEvent(event);
-            // Fire entry event
-            final IslandEnterEvent event2 = new IslandEnterEvent(p, islandTo, e.getTo());
-            plugin.getServer().getPluginManager().callEvent(event2);
-        }
-    }
 
     /**
      * Handles interaction with objects
@@ -1104,21 +982,11 @@ public class IslandGuard implements Listener {
      */
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onPlayerBlockPlace(final BlockPlaceEvent e) {
-        deb.debug("DEBUG: " + e.getEventName());
-        if (e.getPlayer() == null) {
-            deb.debug("DEBUG: player is null");
-        } else {
-            deb.debug("DEBUG: block placed by " + e.getPlayer().getName());
-        }
-        deb.debug("DEBUG: Block is " + e.getBlock().toString());
-
-        deb.debug(e.getEventName());
         if (inWorld(e.getPlayer())) {
             // This permission bypasses protection
             if (e.getPlayer().isOp() && e.getPlayer().hasPermission("is.mod.bypassprotect")) {
                 return;
             }
-            deb.debug("DEBUG: checking is inside protection area");
             IslandData island = plugin.getGrid().getProtectedIslandAt(e.getBlock().getLocation());
             // Outside of island protection zone
             if (island == null) {
@@ -1136,9 +1004,6 @@ public class IslandGuard implements Listener {
                 e.setCancelled(true);
             }
         }
-    }
-
-    public void onSplashPotion(PotionCollideEvent event) {
     }
 
     /**

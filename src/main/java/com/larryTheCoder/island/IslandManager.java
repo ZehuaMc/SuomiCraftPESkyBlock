@@ -63,7 +63,7 @@ public class IslandManager {
                 return;
             }
             p.sendMessage(plugin.getLocale(p).hangInThere);
-            plugin.getGrid().homeTeleport(p, 1);
+            plugin.getGrid().homeTeleport(p, 1, false);
         } else {
             createIsland(p);
         }
@@ -142,14 +142,14 @@ public class IslandManager {
     }
 
     public boolean createIsland(Player p) {
-        return this.createIsland(p, 1, "");
+        return this.createIsland(p, 1, "My Island");
     }
 
     public boolean createIsland(Player p, int templateId, String home) {
-        return this.createIsland(p, templateId, home, plugin.getDefaultWorld(), false, Biome.getBiome(Biome.PLAINS), false);
+        return this.createIsland(p, templateId, home, plugin.getDefaultWorld(), false, Biome.getBiome(Biome.PLAINS));
     }
 
-    public boolean createIsland(Player p, int templateId, String levelName, String home, boolean locked, Biome biome, Boolean teleport) {
+    public boolean createIsland(Player p, int templateId, String levelName, String home, boolean locked, Biome biome) {
         if (Settings.useEconomy) {
             double money = ASkyBlock.econ.getMoney(p);
             if (Settings.islandCost < money || Settings.islandCost == money) {
@@ -187,9 +187,7 @@ public class IslandManager {
                 boolean result = plugin.getDatabase().createIsland(pd);
                 if (result) {
                     p.sendMessage(plugin.getLocale(p).createSuccess);
-                    if (teleport) {
-                        plugin.getGrid().homeTeleport(p, 1);
-                    }
+                    plugin.getGrid().homeTeleport(p, 1, true);
                     return true;
                 } else {
                     p.sendMessage(plugin.getLocale(p).errorFailedCritical);

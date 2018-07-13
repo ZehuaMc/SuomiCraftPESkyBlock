@@ -16,6 +16,8 @@
  */
 package com.larryTheCoder.island;
 
+import cn.nukkit.item.Item;
+import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.block.Block;
@@ -231,7 +233,7 @@ public class GridManager {
      * @return true if the home teleport is successful
      */
     public boolean homeTeleport(final Player player) {
-        return homeTeleport(player, 1);
+        return homeTeleport(player, 1, false);
     }
 
     /**
@@ -242,7 +244,7 @@ public class GridManager {
      * @param number Starting home location e.g., 1
      * @return true if successful, false if not
      */
-    public boolean homeTeleport(Player player, int number) {
+    public boolean homeTeleport(Player player, int number, boolean firstTime) {
         Location home = getSafeHomeLocation(player.getName(), number);
         //if the home null
         if (home == null) {
@@ -250,6 +252,20 @@ public class GridManager {
             return false;
         }
         plugin.getTeleportLogic().safeTeleport(player, home, false, number);
+        //Give stuff so no need to use buggy chest
+        if (firstTime) {
+            PlayerInventory inv = player.getInventory();
+            inv.clearAll();
+            inv.addItem(Item.get(Item.ICE, 0, 2));
+            inv.addItem(Item.get(Item.BUCKET, 10, 1));
+            inv.addItem(Item.get(Item.BONE, 0, 1));
+            inv.addItem(Item.get(Item.SUGARCANE, 0, 1));
+            inv.addItem(Item.get(Item.PUMPKIN_SEEDS, 0, 1));
+            inv.addItem(Item.get(Item.MELON, 0, 1));
+            inv.addItem(Item.get(Item.STEAK, 0, 1));
+            inv.addItem(Item.get(Item.SEEDS, 0, 3));
+            inv.addItem(Item.get(Item.CACTUS, 0, 1));
+        }
         return true;
     }
 

@@ -58,9 +58,8 @@ public class HomeSubCommand extends SubCommand {
     @Override
     public boolean execute(CommandSender sender, String[] args) {
         Player p = sender.getServer().getPlayer(sender.getName());
-        // Only one home? Don't worry. we wont open the form overlay
         if (getPlugin().getDatabase().getIslands(sender.getName()).size() == 1) {
-            getPlugin().getGrid().homeTeleport(p, 1);
+            getPlugin().getGrid().homeTeleport(p, 1, false);
             return true;
         }
 

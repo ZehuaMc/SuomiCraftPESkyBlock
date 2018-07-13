@@ -70,30 +70,15 @@ public class TeleportLogic implements Listener {
             list.remove(player.getName());
         }
         Utils.loadChunkAt(targetLoc);
-        if (player.hasPermission("is.bypass.wait") || (teleportDelay == 0) || force) {
-            player.teleport(targetLoc, PlayerTeleportEvent.TeleportCause.PLUGIN);
+        // Save player inventory
+        if (Settings.saveInventory) {
+            plugin.getInventory().savePlayerInventory(player);
+        }
+        player.teleport(targetLoc, PlayerTeleportEvent.TeleportCause.PLUGIN);
+        if (home == 1) {
+            player.sendMessage(plugin.getPrefix() + TextFormat.GREEN + "Teleported to your island");
         } else {
-            player.sendMessage(plugin.getPrefix() + plugin.getLocale(player).teleportDelay.replace("{0}", "" + teleportDelay));
-            TaskHandler task = plugin.getServer().getScheduler().scheduleDelayedTask(plugin, () -> {
-                // Save player inventory
-                if (Settings.saveInventory) {
-                    plugin.getInventory().savePlayerInventory(player);
-                }
-                pendingTPs.remove(player.getUniqueId());
-                if (home == 1) {
-                    player.sendMessage(plugin.getPrefix() + TextFormat.GREEN + "Teleported to your island");
-                } else {
-                    player.sendMessage(plugin.getPrefix() + TextFormat.GREEN + "Teleported to your island #" + home);
-                }
-                player.teleport(targetLoc.add(0, 0.35), PlayerTeleportEvent.TeleportCause.PLUGIN); // Adjust spawn hieght
-                // Teleport in default gamemode
-                if (Settings.gamemode != -1) {
-                    // BETA Testing: Add this later
-                    //player.setGamemode(Settings.gamemode);
-                }
-            }, Utils.secondsAsMillis(teleportDelay));
-            time.put(player.getName(), Utils.secondsAsMillis(teleportDelay));
-            pendingTPs.put(player.getUniqueId(), new PendingTeleport(player.getLocation(), task));
+            player.sendMessage(plugin.getPrefix() + TextFormat.GREEN + "Teleported to your island #" + home);
         }
     }
 
