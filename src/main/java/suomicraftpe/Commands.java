@@ -20,7 +20,6 @@ import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.ConsoleCommandSender;
 import cn.nukkit.command.PluginCommand;
-import cn.nukkit.network.protocol.ProtocolInfo;
 import cn.nukkit.utils.TextFormat;
 import suomicraftpe.command.SubCommand;
 import suomicraftpe.command.chat.ChatSubCommand;
@@ -125,29 +124,6 @@ public class Commands extends PluginCommand<ASkyBlock> {
         if (args.length == 0 || !args[0].equalsIgnoreCase("help")) {
             if (args.length == 0) {
                 sender.sendMessage("§cUnknown command use /is help for a list of commands");
-                return true;
-            }
-            switch (args[0]) {
-                case "version":
-                case "ver":
-                    sender.sendMessage("§aASkyBlock Module " + ASkyBlock.moduleVersion + " Build 8");
-                    sender.sendMessage("§aVendor Type: " + System.getProperty("os.name"));
-                    sender.sendMessage("§aJava Module Version: " + System.getProperty("java.version"));
-                    sender.sendMessage("§aMinecraft protocol version:" + ProtocolInfo.MINECRAFT_VERSION);
-                    break;
-                case "about":
-                      sender.sendMessage("§aSkyBlock plugin for Nukkit MCPE server software");
-                    break;
-                case "author":
-                    sender.sendMessage("§a- larryTheCoder   => §eCreator");
-                    sender.sendMessage("§a- NycuRO          => §eMember");
-                    sender.sendMessage("§a- PikyCZ          => §eMember");
-                    sender.sendMessage("§a- Skull3x         => §eMember");
-                    sender.sendMessage("§a- Adam1609        => §eMember");
-                    sender.sendMessage("§a- PetteriM1       => §eMember");
-                    break;
-                default:
-                    sender.sendMessage("§cUnknown command use /is help for a list of commands");
             }
             return true;
         }

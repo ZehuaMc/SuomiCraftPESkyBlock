@@ -27,11 +27,9 @@ import cn.nukkit.plugin.PluginManager;
 import cn.nukkit.scheduler.ServerScheduler;
 import cn.nukkit.utils.Config;
 import cn.nukkit.utils.ConfigSection;
-import cn.nukkit.utils.TextFormat;
 import suomicraftpe.command.AdminCMD;
 import suomicraftpe.command.ChallangesCMD;
 import suomicraftpe.database.ASConnection;
-import suomicraftpe.database.JDBCUtilities;
 import suomicraftpe.database.variables.MySQLDatabase;
 import suomicraftpe.database.variables.SQLiteDatabase;
 import suomicraftpe.economy.Economy;
@@ -66,7 +64,7 @@ import java.util.List;
  * Main class of SkyBlock Framework! Complete with API and Events. May contains
  * Nuts!
  */
-public class ASkyBlock extends PluginBase implements ASkyBlockAPI {
+public class ASkyBlock extends PluginBase {
 
     public static SchematicHandler schematics;
     public static Economy econ;

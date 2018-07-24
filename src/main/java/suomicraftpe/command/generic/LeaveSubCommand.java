@@ -21,7 +21,6 @@ import cn.nukkit.command.CommandSender;
 import suomicraftpe.ASkyBlock;
 import suomicraftpe.command.SubCommand;
 import suomicraftpe.storage.WorldSettings;
-import suomicraftpe.utils.Utils;
 
 /**
  * @author Adam Matthew

@@ -21,7 +21,6 @@ package suomicraftpe;
  */
 public class PluginTask extends cn.nukkit.scheduler.PluginTask<ASkyBlock> {
 
-
     public PluginTask(ASkyBlock plugin) {
         super(plugin);
     }
@@ -30,5 +29,4 @@ public class PluginTask extends cn.nukkit.scheduler.PluginTask<ASkyBlock> {
     public void onRun(int currentTick) {
         owner.getInvitationHandler().tick();
     }
-
 }
