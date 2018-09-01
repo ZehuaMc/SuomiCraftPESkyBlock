@@ -50,6 +50,4 @@ public class FactionModule {
     public List<UUID> getFactionAlly() {
         return factionAlly;
     }
-
-    // public
 }

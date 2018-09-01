@@ -60,7 +60,6 @@ public class AdminCMD extends Command {
             return true;
         }
 
-        // Todo: Remove this switches
         switch (args[0]) {
             case "help":
                 this.sendHelp(sender, commandLabel, args);
@@ -276,11 +275,6 @@ public class AdminCMD extends Command {
             helpList.add("&e" + label + " delete &7=> &a" + plugin.getLocale(p).adminHelpDelete);
         }
 
-        if (label.length() > 4) {
-            helpList.add("");
-            helpList.add("&eTired to use looooong commands of isadmin? You can use 'isa' for aliases!");
-        }
-
         int totalPage = helpList.size() % pageHeight == 0 ? helpList.size() / pageHeight : helpList.size() / pageHeight + 1;
         pageNumber = Math.min(pageNumber, totalPage);
         if (pageNumber < 1) {
@@ -297,5 +291,4 @@ public class AdminCMD extends Command {
             i++;
         }
     }
-
 }

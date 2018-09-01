@@ -150,5 +150,4 @@ public final class NBTInputStream implements Closeable {
     public void close() throws IOException {
         is.close();
     }
-
 }

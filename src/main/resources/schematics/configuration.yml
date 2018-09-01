@@ -1,11 +1,11 @@
 ---
-enable: true
+enable: false
 schematicList:
   schematic:
     island:
       FILE_NAME: "island.schematic"
       NAME: "Island"
-      DESCRIPTION: "The default island for starters"
+      DESCRIPTION: ""
       PERMISSION: "is.create"
       RATING: 1.8
       BIOME: "Plains"

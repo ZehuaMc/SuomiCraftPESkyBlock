@@ -62,8 +62,6 @@ public final class SchematicHandler {
     private short height;
     // Bedrock location (can be null)
     private Map<Integer, SoftReference<Vector3>> bedrock;
-    private Map<Integer, ArrayList<SoftReference<Vector3>>> chest;
-    private Map<Integer, ArrayList<SoftReference<Vector3>>> welcomeSign;
     // Panel configuration
     private List<String> schematicList;
     // Configuration
@@ -91,8 +89,6 @@ public final class SchematicHandler {
         // Start the schematic handler
         islandBlocks = Maps.newHashMap();
         bedrock = Maps.newHashMap();
-        chest = Maps.newHashMap();
-        welcomeSign = Maps.newHashMap();
         tileEntitiesMap = Maps.newHashMap();
         schemaConfiguration = Maps.newHashMap();
         schematicKey = Maps.newHashMap();
@@ -391,8 +387,6 @@ public final class SchematicHandler {
                 continue;
             }
             Vector3 bedrockLocation = null;
-            ArrayList<SoftReference<Vector3>> chestLocation = Lists.newArrayList();
-            ArrayList<SoftReference<Vector3>> signLocation = Lists.newArrayList();
             for (int x = 0; x < width; ++x) {
                 for (int y = 0; y < height; ++y) {
                     for (int z = 0; z < length; ++z) {
@@ -660,7 +654,7 @@ public final class SchematicHandler {
         world.setBlockIdAt(X, groundHeight + 3, Z, Block.SAND);
         world.setBlockIdAt(X, groundHeight + 4, Z, Block.SAND);
         world.setBlockIdAt(X, groundHeight + 5, Z, Block.SAND);
-        // Tree and Chest
+        // Tree
         ObjectTree.growTree(world, X, groundHeight + 7, Z, new NukkitRandom(), BlockSapling.OAK);
     }
 

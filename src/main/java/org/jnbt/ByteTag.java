@@ -37,5 +37,4 @@ public final class ByteTag extends Tag {
         }
         return "TAG_Byte" + append + ": " + value;
     }
-
 }

@@ -79,5 +79,4 @@ public class SetHomeSubCommand extends SubCommand {
         }
         return true;
     }
-
 }

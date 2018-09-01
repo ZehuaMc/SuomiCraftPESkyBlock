@@ -67,5 +67,4 @@ public class AcceptSubCommand extends SubCommand {
         pd.getInvitation(p).accept();
         return true;
     }
-
 }

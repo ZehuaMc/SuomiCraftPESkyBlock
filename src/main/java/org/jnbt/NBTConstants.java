@@ -36,5 +36,4 @@ public final class NBTConstants {
     private NBTConstants() {
 
     }
-
 }

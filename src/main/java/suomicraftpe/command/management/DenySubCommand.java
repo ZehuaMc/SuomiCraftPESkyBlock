@@ -67,5 +67,4 @@ public class DenySubCommand extends SubCommand {
         pd.getInvitation(p).deny();
         return true;
     }
-
 }

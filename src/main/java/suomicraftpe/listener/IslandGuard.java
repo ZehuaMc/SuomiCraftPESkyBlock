@@ -179,8 +179,6 @@ public class IslandGuard implements Listener {
          * islandTo != null && islandFrom != null - same PlayerIsland or teleport?
          * islandTo == islandFrom
          */
-//        deb.debug("islandTo = " + islandTo);
-//        deb.debug("islandFrom = " + islandFrom);
 
         if (islandTo != null && (islandTo.getOwner() != null || islandTo.isSpawn())) {
             // Lock check
@@ -341,7 +339,7 @@ public class IslandGuard implements Listener {
                 return;
             }
             // Handle fireworks
-            if (e.getItem() != null && e.getItem().equals(Item.FIRE_CHARGE)) {
+            if (e.getItem() != null && e.getItem().getId() == Item.FIRE_CHARGE) {
                 if (island == null) {
                     if (!Settings.defaultWorldSettings.get(IslandData.SettingsFlag.PLACE_BLOCKS)) {
                         p.sendMessage(getPrefix() + plugin.getLocale(e.getPlayer()).islandProtected);
@@ -901,16 +899,11 @@ public class IslandGuard implements Listener {
         if (!Settings.allowCreeperGriefing && e.getDamager().getNetworkId() == EntityCreeper.NETWORK_ID) {
             // Now we have to check what the target was
             EntityCreeper creeper = (EntityCreeper) e.getDamager();
-//            deb.debug("DEBUG: creeper is damager");
-//            deb.debug("DEBUG: entity being damaged is " + e.getEntity());
 //            if (creeper.getinstanceof Player) {
-//                deb.debug("DEBUG: target is a player");
 //                Player target = (Player) creeper.getTarget();
-//                deb.debug("DEBUG: player = " + target.getName());
 //                // Check if the target is on their own island or not
 //                if (!plugin.getGrid().locationIsOnIsland(target, e.getEntity().getLocation())) {
 //                    // They are a visitor tsk tsk
-//                    deb.debug("DEBUG: player is a visitor");
 //                    e.setCancelled(true);
 //                    return;
 //                }

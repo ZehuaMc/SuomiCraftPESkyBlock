@@ -139,7 +139,6 @@ public class ChatHandler implements Listener {
      * @param player
      */
     public void setPlayerChallengeLevel(Player player) {
-        //plugin.getLogger().info("DEBUG: setting player's challenge level to " + plugin.getChallenges().getChallengeLevel(player));
         playerChallengeLevels.put(player.getUniqueId(), plugin.getChallenges().getChallengeLevel(player));
     }
 
@@ -150,7 +149,6 @@ public class ChatHandler implements Listener {
      * @param level
      */
     public void setPlayerLevel(Player playerUUID, int level) {
-        //plugin.getLogger().info("DEBUG: putting " + playerUUID.toString() + " Level " + level);
         playerLevels.put(playerUUID, String.valueOf(level));
     }
 

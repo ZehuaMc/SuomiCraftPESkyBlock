@@ -211,5 +211,4 @@ public class Commands extends PluginCommand<ASkyBlock> {
         }
         return true;
     }
-
 }

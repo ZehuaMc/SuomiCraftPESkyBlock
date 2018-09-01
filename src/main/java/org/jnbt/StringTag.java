@@ -37,5 +37,4 @@ public final class StringTag extends Tag {
         }
         return "TAG_String" + append + ": " + value;
     }
-
 }

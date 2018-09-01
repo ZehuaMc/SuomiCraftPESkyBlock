@@ -94,5 +94,4 @@ public class Settings {
     public static boolean useEconomy = false;
     public static double islandCost = 10D;
     public static boolean firstIslandFree = true;
-
 }

@@ -67,5 +67,4 @@ public class InfoSubCommand extends SubCommand {
         getPlugin().getIsland().islandInfo(p, p.getLocation());
         return true;
     }
-
 }

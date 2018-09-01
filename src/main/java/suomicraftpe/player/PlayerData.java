@@ -181,5 +181,4 @@ public class PlayerData implements Cloneable {
         Location l = Utils.getLocationString(teamIslandLocation);
         return l;
     }
-
 }

@@ -118,5 +118,4 @@ public final class NBTUtils {
                 throw new IllegalArgumentException("Invalid tag type : " + type + ".");
         }
     }
-
 }

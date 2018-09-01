@@ -5,8 +5,8 @@
 
     <name>ASkyBlock</name>
     <groupId>larryTheCoder</groupId>
-    <artifactId>ASkyBlock</artifactId>
-    <version>SuomiCraftPE</version>
+    <artifactId>SkyBlock</artifactId>
+    <version>0.5</version>
 
     <licenses>
         <license>

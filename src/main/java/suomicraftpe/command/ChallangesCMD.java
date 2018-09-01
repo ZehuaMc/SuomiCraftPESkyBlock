@@ -91,15 +91,12 @@ public final class ChallangesCMD extends Command {
                     giveReward(p, args[1].toLowerCase());
                     int newLevel = getLevelDone(p);
                     // Fire an event if they are different
-                    //Utils.send("DEBUG: " + oldLevel + " " + newLevel);
                     if (oldLevel < newLevel) {
                         // Update chat
                         plugin.getChatHandlers().setPlayerChallengeLevel(p);
                         // Run commands and give rewards but only if they haven't done it below
-                        //Utils.send("DEBUG: old level = " + oldLevel + " new level = " + newLevel);
                         String level = Settings.challengeLevels.get(newLevel);
                         if (!level.isEmpty() && !checkChallenge(p, level)) {
-                            //Utils.send("DEBUG: level name = " + level);
                             completeChallenge(p, level);
                             String message = TextFormat.colorize('&', getChallengeConfig().getString("challenges.levelUnlock." + level + ".message", ""));
                             if (!message.isEmpty()) {
@@ -312,7 +309,6 @@ public final class ChallangesCMD extends Command {
      * @return challenge level
      */
     public String getChallengeLevel(Player player) {
-        //Utils.send("DEBUG: getting challenge level for " + player.getName());
         if (Settings.challengeLevels.isEmpty()) {
             return "";
         }
@@ -326,8 +322,6 @@ public final class ChallangesCMD extends Command {
      * @return level number
      */
     private int getLevelDone(Player player) {
-        //Utils.send("DEBUG: checking level completed");
-        //Utils.send("DEBUG: getting challenge level for " + player.getName());
         for (int result = 0; result < Settings.challengeLevels.size(); result++) {
             if (checkLevelCompletion(player, Settings.challengeLevels.get(result)) > 0) {
                 return result;
@@ -344,9 +338,6 @@ public final class ChallangesCMD extends Command {
      * @return true if player can complete otherwise false
      */
     public boolean checkIfCanCompleteChallenge(final Player player, final String challenge) {
-        // Utils.send("DEBUG: " + player.getDisplayName() + " " +
-        // challenge);
-        // Utils.send("DEBUG: 1");
         // Check if the challenge exists
         /*
         if (!isLevelAvailable(player, getChallengeConfig().getString("challenges.challengeList." + challenge.toLowerCase() + ".level"))) {
@@ -377,14 +368,12 @@ public final class ChallangesCMD extends Command {
                 }
             }
         }
-        // Utils.send("DEBUG: 2");
         // Check if it is repeatable
         if (checkChallenge(player, challenge)
             && !getChallengeConfig().getBoolean("challenges.challengeList." + challenge + ".repeatable")) {
             player.sendMessage(plugin.getPrefix() + TextFormat.RED + "This challange is not repeatable!");
             return false;
         }
-        // Utils.send("DEBUG: 3");
         // If the challenge is an island type and already done, then this too is
         // not repeatable
         if (checkChallenge(player, challenge)
@@ -392,7 +381,6 @@ public final class ChallangesCMD extends Command {
             player.sendMessage(plugin.getPrefix() + TextFormat.RED + "This challange is not repeatable!");
             return false;
         }
-        // Utils.send("DEBUG: 4");
         // Check if this is an inventory challenge
         if (getChallengeConfig().getString("challenges.challengeList." + challenge + ".type").equalsIgnoreCase("inventory")) {
             // Check if the player has the required items
@@ -412,10 +400,8 @@ public final class ChallangesCMD extends Command {
             }
             return true;
         }
-        // Utils.send("DEBUG: 5");
         // Check if this is an island-based challenge
         if (getChallengeConfig().getString("challenges.challengeList." + challenge + ".type").equalsIgnoreCase("island")) {
-            // Utils.send("DEBUG: 6");
             if (!plugin.getGrid().playerIsOnIsland(player)) {
                 player.sendMessage(TextFormat.RED + "You are not in island!");
                 return false;
@@ -440,7 +426,6 @@ public final class ChallangesCMD extends Command {
                 });
                 return false;
             }
-            // Utils.send("DEBUG: 7");
             return true;
         }
         // Island level check
@@ -527,18 +512,12 @@ public final class ChallangesCMD extends Command {
                         }
                         reqAmount = Integer.parseInt(part[1]);
                         Item item = reqItem;
-                        // Utils.send(TextFormat.GREEN +"DEBUG: required item = " +
-                        // reqItem.toString());
-                        // Utils.send(TextFormat.GREEN +"DEBUG: item amount = " +
-                        // reqAmount);
 
                         if (!player.getInventory().contains(reqItem)) {
                             return false;
                         } else {
                             // check amount
                             int amount = 0;
-                            // Utils.send(TextFormat.GREEN +"DEBUG: Amount in inventory = "
-                            // + player.getInventory().all(reqItem).size());
                             // Go through all the inventory and try to find
                             // enough required items
                             for (Map.Entry<Integer, Item> en : player.getInventory().all(reqItem).entrySet()) {
@@ -548,7 +527,6 @@ public final class ChallangesCMD extends Command {
                                 // Map needs special handling because the
                                 // durability increments every time a new one is
                                 // made by the player
-                                // TODO: if there are any other items that act
                                 // in the same way, they need adding too...
                                 if (i.hasEnchantments() == false || (reqItem.getId() == Item.MAP && i.getId() == Item.MAP)) {
                                     // Clear any naming, or lore etc.
@@ -570,25 +548,12 @@ public final class ChallangesCMD extends Command {
                                         // original
                                         toBeRemoved.add(i.clone());
                                         amount += i.getCount();
-                                        // Utils.send(TextFormat.GREEN +"DEBUG: amount is <= req Remove "
-                                        // + i.toString() + ":" +
-                                        // i.getDurability() + " x " +
-                                        // i.getCount());
                                     } else if ((amount + i.getCount()) == reqAmount) {
-                                        // Utils.send(TextFormat.GREEN +"DEBUG: amount is = req Remove "
-                                        // + i.toString() + ":" +
-                                        // i.getDurability() + " x " +
-                                        // i.getCount());
                                         toBeRemoved.add(i.clone());
                                         amount += i.getCount();
                                         break;
                                     } else {
                                         // Remove a portion of this item
-                                        // Utils.send(TextFormat.GREEN +"DEBUG: amount is > req Remove "
-                                        // + i.toString() + ":" +
-                                        // i.getDurability() + " x " +
-                                        // i.getCount());
-
                                         item.setCount(reqAmount - amount);
                                         toBeRemoved.add(item);
                                         amount += i.getCount();
@@ -596,8 +561,6 @@ public final class ChallangesCMD extends Command {
                                     }
                                 }
                             }
-                            // Utils.send(TextFormat.GREEN +"DEBUG: amount "+
-                            // amount);
                             if (amount < reqAmount) {
                                 return false;
                             }
@@ -674,21 +637,11 @@ public final class ChallangesCMD extends Command {
                                 // original
                                 toBeRemoved.add(i.clone());
                                 amount += i.getCount();
-                                // Utils.send(TextFormat.GREEN +"DEBUG: amount is <= req Remove "
-                                // + i.toString() + ":" +
-                                // i.getDurability()
-                                // + " x " + i.getCount());
                             } else if ((amount + i.getCount()) == reqAmount) {
                                 toBeRemoved.add(i.clone());
                                 amount += i.getCount();
                                 break;
                             } else {
-                                // Remove a portion of this item
-                                // Utils.send(TextFormat.GREEN +"DEBUG: amount is > req Remove "
-                                // + i.toString() + ":" +
-                                // i.getDurability()
-                                // + " x " + i.getCount());
-
                                 item.setCount(reqAmount - amount);
                                 item.setDamage(i.getDamage());
                                 toBeRemoved.add(item);
@@ -697,29 +650,14 @@ public final class ChallangesCMD extends Command {
                             }
                         }
                     }
-                    // Utils.send(TextFormat.GREEN +"DEBUG: amount is " +
-                    // amount);
-                    // Utils.send(TextFormat.GREEN +"DEBUG: req amount is " +
-                    // reqAmount);
                     if (amount < reqAmount) {
                         return false;
                     }
-
-                    // Utils.send(TextFormat.GREEN +"DEBUG: before set amount " +
-                    // item.toString() + ":" + item.getDurability() + " x "
-                    // + item.getCount());
-                    // item.setAmount(reqAmount);
-                    // Utils.send(TextFormat.GREEN +"DEBUG: after set amount " +
-                    // item.toString() + ":" + item.getDurability() + " x "
-                    // + item.getCount());
-                    // toBeRemoved.add(item);
                 } else if (part.length == 6 && part[0].contains("POTION")) {
-                    // BUKKIT v1.0
                     // Run through player's inventory for the item
                     Map<Integer, Item> playerInv = player.getInventory().getContents();
                     try {
                         reqAmount = Integer.parseInt(part[5]);
-                        //Utils.send(TextFormat.GREEN +"DEBUG: required amount is " + reqAmount);
                     } catch (Exception e) {
                         Utils.send(TextFormat.RED + "Could not parse the quantity of the potion item " + s);
                         return false;
@@ -1126,19 +1064,15 @@ public final class ChallangesCMD extends Command {
             }
         }
         if (element.length > 3) {
-            //plugin.getLogger().info("DEBUG: level = " + Integer.valueOf(element[2]));
             if (element[3].equalsIgnoreCase("EXTENDED")) {
-                //plugin.getLogger().info("DEBUG: Extended");
                 extended = true;
             }
         }
         if (element.length > 4) {
             if (element[4].equalsIgnoreCase("SPLASH")) {
-                //plugin.getLogger().info("DEBUG: splash");
                 splash = true;
             }
             if (element[4].equalsIgnoreCase("LINGER")) {
-                //plugin.getLogger().info("DEBUG: linger");
                 linger = true;
             }
         }

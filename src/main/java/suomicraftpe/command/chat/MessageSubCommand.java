@@ -76,5 +76,4 @@ public class MessageSubCommand extends SubCommand {
         }
         return true;
     }
-
 }

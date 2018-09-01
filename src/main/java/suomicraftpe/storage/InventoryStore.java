@@ -60,5 +60,4 @@ class InventoryStore {
     public void setArmor(Item[] armor) {
         this.armor.add(armor);
     }
-
 }

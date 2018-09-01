@@ -172,7 +172,6 @@ public final class ASlocales {
         this.index = index;
         this.localeName = localeName;
         getLocale(localeName);
-        loadLocale();
         if (!localeName.equalsIgnoreCase("locale")) {
             localeObject = new Locale(localeName.substring(0, 2), localeName.substring(3, 5));
         }
@@ -226,13 +225,6 @@ public final class ASlocales {
                         plugin.getLogger().emergency("Could not find any locale file!");
                     }
             }
-    }
-
-    /**
-     * Reloads the locale file
-     */
-    private void loadLocale() {
-        // TODO: complete this plugin
     }
 
     /**

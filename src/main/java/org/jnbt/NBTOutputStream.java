@@ -237,5 +237,4 @@ public final class NBTOutputStream implements Closeable {
     public void close() throws IOException {
         os.close();
     }
-
 }

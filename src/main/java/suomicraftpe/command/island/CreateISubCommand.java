@@ -61,5 +61,4 @@ public class CreateISubCommand extends SubCommand {
         getPlugin().getPanel().addIslandFormOverlay(p);
         return true;
     }
-
 }

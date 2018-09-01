@@ -37,5 +37,4 @@ public final class DoubleTag extends Tag {
         }
         return "TAG_Double" + append + ": " + value;
     }
-
 }

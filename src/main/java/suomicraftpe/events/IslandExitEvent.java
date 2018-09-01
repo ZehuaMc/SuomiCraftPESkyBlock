@@ -47,5 +47,4 @@ public class IslandExitEvent extends ASkyBlockEvent {
     public Location getLocation() {
         return location;
     }
-
 }

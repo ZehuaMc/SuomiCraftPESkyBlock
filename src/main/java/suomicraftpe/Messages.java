@@ -18,7 +18,6 @@ package suomicraftpe;
 
 import cn.nukkit.Player;
 import cn.nukkit.utils.Config;
-import suomicraftpe.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,7 +35,6 @@ public class Messages {
 
     private final HashMap<String, List<String>> messages = new HashMap<>();
     private ASkyBlock plugin;
-    private Config messageStore;
 
     /**
      * @param plugin

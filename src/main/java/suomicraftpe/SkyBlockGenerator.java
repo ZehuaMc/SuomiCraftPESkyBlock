@@ -16,7 +16,6 @@
  */
 package suomicraftpe;
 
-import cn.nukkit.block.Block;
 import cn.nukkit.level.ChunkManager;
 import cn.nukkit.level.Level;
 import cn.nukkit.level.format.generic.BaseFullChunk;
@@ -24,7 +23,6 @@ import cn.nukkit.level.generator.Generator;
 import cn.nukkit.level.generator.biome.Biome;
 import cn.nukkit.math.NukkitRandom;
 import cn.nukkit.math.Vector3;
-import suomicraftpe.utils.Settings;
 
 import java.util.Map;
 
@@ -59,13 +57,6 @@ public class SkyBlockGenerator extends Generator {
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
                 chunk.setBiomeId(x, z, Biome.PLAINS);
-            }
-        }
-        for (int x = 0; x < 16; x++) {
-            for (int z = 0; z < 16; z++) {
-                for (int y = 0; y < Settings.seaLevel; y++) {
-                    chunk.setBlock(x, y, z, Block.STILL_WATER);
-                }
             }
         }
     }

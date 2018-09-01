@@ -195,7 +195,6 @@ public final class ASConnection {
             stmt.close();
             return true;
         } catch (SQLException ex) {
-            //JDBCUtilities.printSQLException(ex);
         }
         return false;
     }
@@ -226,7 +225,6 @@ public final class ASConnection {
             }
             stmt.close();
         } catch (SQLException ex) {
-            //JDBCUtilities.printSQLException(ex);
         }
         return database;
     }
@@ -255,7 +253,6 @@ public final class ASConnection {
             }
             stmt.close();
         } catch (SQLException ex) {
-            //JDBCUtilities.printSQLException(ex);
         }
         if (enableFastCache) {
             // Save the island into cache
@@ -290,7 +287,6 @@ public final class ASConnection {
             }
             stmt.close();
         } catch (SQLException ex) {
-            //JDBCUtilities.printSQLException(ex);
         }
         if (enableFastCache) {
             // Save the island into cache
@@ -319,7 +315,6 @@ public final class ASConnection {
             pd = new IslandData(set.getString("world"), set.getInt("x"), set.getInt("y"), set.getInt("z"), set.getInt("spawnX"), set.getInt("spawnY"), set.getInt("spawnZ"), set.getInt("psize"), set.getString("name"), set.getString("owner"), set.getString("biome"), set.getInt("id"), set.getInt("islandId"), set.getBoolean("locked"), set.getString("protection"), set.getBoolean("isSpawn"));
             stmt.close();
         } catch (SQLException ex) {
-            //JDBCUtilities.printSQLException(ex);
         }
         if (enableFastCache) {
             islandCache.add(pd);
@@ -345,7 +340,6 @@ public final class ASConnection {
             set.execute();
             result = true;
         } catch (SQLException ex) {
-            //JDBCUtilities.printSQLException(ex);
         }
         if (enableFastCache) {
             islandCache.remove(pd);
@@ -371,7 +365,6 @@ public final class ASConnection {
             }
             stmt.close();
         } catch (SQLException ex) {
-            //JDBCUtilities.printSQLException(ex);
         }
         islandSpawn = pd;
         return pd;
@@ -398,7 +391,6 @@ public final class ASConnection {
             }
             stmt.close();
         } catch (SQLException ex) {
-            //JDBCUtilities.printSQLException(ex);
         }
         if (enableFastCache) {
             islandCache.add(pd);
@@ -414,7 +406,6 @@ public final class ASConnection {
             islandCache.clear();
             islandSpawn = null;
         } catch (SQLException ex) {
-            //JDBCUtilities.printSQLException(ex);
         }
     }
 
@@ -443,7 +434,6 @@ public final class ASConnection {
         } catch (BatchUpdateException b) {
             JDBCUtilities.printBatchUpdateException(b);
         } catch (SQLException ex) {
-            //JDBCUtilities.printSQLException(ex);
         }
         return false;
     }
@@ -474,7 +464,6 @@ public final class ASConnection {
             }
             return true;
         } catch (SQLException ex) {
-            //JDBCUtilities.printSQLException(ex);
         }
         return false;
     }
@@ -490,7 +479,6 @@ public final class ASConnection {
                 world.add(set.getString("world"));
             }
         } catch (SQLException ex) {
-            //JDBCUtilities.printSQLException(ex);
         }
         return world;
     }
@@ -508,7 +496,6 @@ public final class ASConnection {
             set.close();
             return true;
         } catch (SQLException ex) {
-            //JDBCUtilities.printSQLException(ex);
         }
         return false;
     }
@@ -524,7 +511,6 @@ public final class ASConnection {
                 playersData.add(set.getString("player"));
             }
         } catch (SQLException ex) {
-            //JDBCUtilities.printSQLException(ex);
         }
         return playersData;
     }
@@ -551,7 +537,6 @@ public final class ASConnection {
                 Utils.stringToArray(set.getString("banList"), ", "),
                 set.getString("locale"));
         } catch (SQLException ex) {
-            //JDBCUtilities.printSQLException(ex);
         }
         return pd;
     }
@@ -594,7 +579,6 @@ public final class ASConnection {
         } catch (BatchUpdateException b) {
             JDBCUtilities.printBatchUpdateException(b);
         } catch (SQLException ex) {
-            //JDBCUtilities.printSQLException(ex);
         }
         return false;
     }
@@ -634,7 +618,6 @@ public final class ASConnection {
             stmt.close();
             return true;
         } catch (SQLException ex) {
-            //JDBCUtilities.printSQLException(ex);
         }
         return false;
     }

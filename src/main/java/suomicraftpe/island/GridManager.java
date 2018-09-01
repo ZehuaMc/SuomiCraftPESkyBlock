@@ -283,5 +283,4 @@ public class GridManager {
     public boolean isAtSpawn(Location location) {
         return plugin.getDatabase().getSpawn().onIsland(location);
     }
-
 }

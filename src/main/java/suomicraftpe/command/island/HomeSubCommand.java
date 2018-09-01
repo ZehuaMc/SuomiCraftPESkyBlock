@@ -66,5 +66,4 @@ public class HomeSubCommand extends SubCommand {
         getPlugin().getPanel().addHomeFormOverlay(p);
         return true;
     }
-
 }

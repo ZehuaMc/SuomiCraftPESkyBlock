@@ -102,5 +102,4 @@ public class SQLiteDatabase implements AbstractDatabase {
         this.connection = DriverManager.getConnection("jdbc:sqlite:" + this.dbLocation);
         return this.connection;
     }
-
 }

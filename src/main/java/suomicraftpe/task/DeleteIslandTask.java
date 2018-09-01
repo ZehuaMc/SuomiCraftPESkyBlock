@@ -16,7 +16,6 @@
  */
 package suomicraftpe.task;
 
-import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.block.Block;
 import cn.nukkit.blockentity.BlockEntity;
@@ -193,5 +192,4 @@ public class DeleteIslandTask implements Runnable {
 
         ASkyBlock.get().getDatabase().deleteIsland(pd);
     }
-
 }

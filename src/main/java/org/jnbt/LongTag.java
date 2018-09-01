@@ -37,5 +37,4 @@ public final class LongTag extends Tag {
         }
         return "TAG_Long" + append + ": " + value;
     }
-
 }

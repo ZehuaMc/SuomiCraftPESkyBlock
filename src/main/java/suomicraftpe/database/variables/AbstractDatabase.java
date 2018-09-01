@@ -82,5 +82,4 @@ public interface AbstractDatabase {
      * @throws ClassNotFoundException If the driver cannot be found; see {@link #openConnection()}
      */
     int updateSQL(String query) throws SQLException, ClassNotFoundException;
-
 }

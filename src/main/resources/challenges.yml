@@ -14,16 +14,9 @@ challenges:
       level: 'Default'
       type: inventory
       requiredItems: 'GLASS:1'
-      # You can require the player has a certain amount of money for inventory challenges.
-      # Remember to mention it in the description!
-      # If takeItems is true, the money will be removed, so you may want to give it
-      # back in the reward.
-      #requiredMoney: 10
       takeItems: true
       itemReward: 'ICE:1'
       rewardText: '1 block of ice'
-      #rewardcommands:
-      #- kit tools [player]
       moneyReward: 10
       expReward: 30
       permissionReward: ''
@@ -32,12 +25,7 @@ challenges:
       repeatRewardText: '1 block of ice'
       repeatMoneyReward: 5
       repeatExpReward: 10
-      #repeatrewardcommands:
-      # Max times limits how many times a challenge can be done. Comment out to make unlimited
       maxtimes: 2
-      # Allow this challenge to reset when the player resets their island
-      # Default is true. Set to false to keep this challenge completed.
-      # Admins can always reset challenges even if this is set to false.
       resetallowed: true
     breadmaker:
       friendlyname: 'Bread Maker'
@@ -57,7 +45,6 @@ challenges:
       repeatRewardText: '1 dirt'
       repeatMoneyReward: 5
       repeatExpReward: 10
-      # Max times limits how many times a challenge can be done. Comment out to make unlimited
       maxtimes: 100
     dyemaker:
       friendlyname: 'Dye Maker'
@@ -77,7 +64,6 @@ challenges:
       repeatRewardText: '1 of each kind of sapling'
       repeatMoneyReward: 5
       repeatExpReward: 10
-      # Max times limits how many times a challenge can be done. Comment out to make unlimited
       maxtimes: 100
     papermaker:
       friendlyname: 'Paper Maker'
@@ -97,7 +83,6 @@ challenges:
       repeatRewardText: '2 sand blocks'
       repeatMoneyReward: 5
       repeatExpReward: 10
-      # Max times limits how many times a challenge can be done. Comment out to make unlimited
       maxtimes: 100
     cobblemaker:
       friendlyname: 'Cobble Maker'
@@ -117,7 +102,6 @@ challenges:
       repeatRewardText: '1 leather'
       repeatMoneyReward: 5
       repeatExpReward: 10
-      # Max times limits how many times a challenge can be done. Comment out to make unlimited
       maxtimes: 100
     seedbank:
       friendlyname: 'Seedbank'
@@ -137,7 +121,6 @@ challenges:
       repeatRewardText: '2 dirt blocks and 5 vines'
       repeatMoneyReward: 5
       repeatExpReward: 10
-      # Max times limits how many times a challenge can be done. Comment out to make unlimited
       maxtimes: 100
     stewmaker:
       friendlyname: 'Stew Maker'
@@ -157,7 +140,6 @@ challenges:
       repeatRewardText: '1 mycelium block'
       repeatMoneyReward: 5
       repeatExpReward: 10
-      # Max times limits how many times a challenge can be done. Comment out to make unlimited
       maxtimes: 100
     builder:
       friendlyname: 'Builder'
@@ -194,7 +176,6 @@ challenges:
       repeatRewardText: '2 redstone dust, 1 flint, 1 water breathing potion and 1 iron(ore)'
       repeatMoneyReward: 15
       repeatExpReward: 15
-      # Max times limits how many times a challenge can be done. Comment out to make unlimited
       maxtimes: 100
     farmer:
       description: 'Harvest 64 units of the following: wheat, sugar, melon, carrots, potatoes, pumpkin'
@@ -213,7 +194,6 @@ challenges:
       repeatRewardText: '1 cocoa bean, 1 spawn egg(chicken,cow,pig)'
       repeatMoneyReward: 20
       repeatExpReward: 20
-      # Max times limits how many times a challenge can be done. Comment out to make unlimited
       maxtimes: 100
     angler:
       friendlyname: 'Angler'
@@ -233,7 +213,6 @@ challenges:
       repeatRewardText: '2 redstone dust, 1 inksac, 1 iron (ore)'
       repeatMoneyReward: 15
       repeatExpReward: 15
-      # Max times limits how many times a challenge can be done. Comment out to make unlimited
       maxtimes: 100
     treecutter:
       friendlyname: 'Treecutter'
@@ -253,7 +232,6 @@ challenges:
       repeatRewardText: '2 redstone dust, 1 iron (ore)'
       repeatMoneyReward: 15
       repeatExpReward: 15
-      # Max times limits how many times a challenge can be done. Comment out to make unlimited
       maxtimes: 100
     cookiemaker:
       friendlyname: 'Cookie Maker'
@@ -273,7 +251,6 @@ challenges:
       repeatRewardText: '2 redstone dust, 1 iron (ore)'
       repeatMoneyReward: 15
       repeatExpReward: 15
-      # Max times limits how many times a challenge can be done. Comment out to make unlimited
       maxtimes: 100
     craftsman:
       friendlyname: 'Craftsman'
@@ -300,9 +277,6 @@ challenges:
       level: 'Default'
       type: island
       requiredItems: 'BED_BLOCK:1 WORKBENCH:1 GLASS:1 WOODEN_DOOR:1 FURNACE:1 BOOKSHELF:1 TORCH:1'
-      # Search radius - the number of blocks that will be searched around the player
-      # Minimum 10, which searches from -10 to +10 blocks around the player in x,y,z
-      # Max is 50 because big searches cause lag
       searchRadius: 10
       takeItems: false
       itemReward: 'JUKEBOX:1 RECORD_12:1 LAPIS_BLOCK:10'
@@ -351,7 +325,6 @@ challenges:
       repeatRewardText: '1 gold ingot and 1 blaze rod'
       repeatMoneyReward: 15
       repeatExpReward: 15
-      # Max times limits how many times a challenge can be done. Comment out to make unlimited
       maxtimes: 100
     slimeballfarmer:
       friendlyname: 'Slimeball Farmer'
@@ -371,7 +344,6 @@ challenges:
       repeatRewardText: '8 redstone dust'
       repeatMoneyReward: 15
       repeatExpReward: 15
-      # Max times limits how many times a challenge can be done. Comment out to make unlimited
       maxtimes: 100
     baker:
       friendlyname: 'baker'
@@ -391,7 +363,6 @@ challenges:
       repeatRewardText: '1 iron (ore)'
       repeatMoneyReward: 15
       repeatExpReward: 15
-      # Max times limits how many times a challenge can be done. Comment out to make unlimited
       maxtimes: 100
     pioneer:
       friendlyname: 'Pioneer'
@@ -411,7 +382,6 @@ challenges:
       repeatRewardText: '1 iron (ore)'
       repeatMoneyReward: 20
       repeatExpReward: 20
-      # Max times limits how many times a challenge can be done. Comment out to make unlimited
       maxtimes: 100
     mason:
       friendlyname: 'Mason'
@@ -449,7 +419,6 @@ challenges:
       repeatRewardText: '1 emerald, 1 sheep spawn egg'
       repeatMoneyReward: 20
       repeatExpReward: 20
-      # Max times limits how many times a challenge can be done. Comment out to make unlimited
       maxtimes: 100
     alchemist:
       friendlyname: 'Alchemist'
@@ -487,7 +456,6 @@ challenges:
       repeatRewardText: '1 diamond, 5 emeralds and 2 gold bars'
       repeatMoneyReward: 20
       repeatExpReward: 20
-      # Max times limits how many times a challenge can be done. Comment out to make unlimited
       maxtimes: 100
     gemcollector:
       friendlyname: 'Gem Collector'
@@ -507,7 +475,6 @@ challenges:
       repeatRewardText: '2 gold ingots'
       repeatMoneyReward: 20
       repeatExpReward: 20
-      # Max times limits how many times a challenge can be done. Comment out to make unlimited
       maxtimes: 100
     culinaryartist:
       friendlyname: 'Culinary Artist'
@@ -516,8 +483,6 @@ challenges:
       level: 'Default'
       type: inventory
       requiredItems: 'BAKED_POTATO:1 BREAD:1 CAKE:1 COOKED_CHICKEN:1 COOKED_FISH:1 GRILLED_PORK:1 COOKIE:1 GOLDEN_APPLE:0:1 GOLDEN_CARROT:1 MUSHROOM_SOUP:1 PUMPKIN_PIE:1 COOKED_BEEF:1'
-      # If you are running 1.8 change to this:
-      # requiredItems: 'BAKED_POTATO:1 BREAD:1 CAKE:1 COOKED_CHICKEN:1 COOKED_FISH:1 GRILLED_PORK:1 COOKIE:1 GOLDEN_APPLE:0:1 GOLDEN_CARROT:1 MUSHROOM_SOUP:1 PUMPKIN_PIE:1 COOKED_BEEF:1 COOKED_RABBIT:1 RABBIT_STEW:1 COOKED_MUTTON:1'
       takeItems: true
       itemReward: 'GOLD_BLOCK:2 GREEN_RECORD:1 RECORD_3:1 RECORD_5:1 MONSTER_EGG:MUSHROOM_COW:1 EMERALD:5'
       rewardText: '2 gold blocks, 3 music discs, 1 mooshroom spawn egg, and 5 emeralds'
@@ -529,7 +494,6 @@ challenges:
       repeatRewardText: '10 gold ingots, 1 mooshroom spawn egg, 1 emerald'
       repeatMoneyReward: 20
       repeatExpReward: 20
-      # Max times limits how many times a challenge can be done. Comment out to make unlimited
       maxtimes: 100
     beaconator:
       friendlyname: 'Beaconator'

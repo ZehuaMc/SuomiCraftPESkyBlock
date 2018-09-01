@@ -84,5 +84,4 @@ public class InviteSubCommand extends SubCommand {
         getPlugin().getInvitationHandler().addInvitation(p, invite);
         return true;
     }
-
 }

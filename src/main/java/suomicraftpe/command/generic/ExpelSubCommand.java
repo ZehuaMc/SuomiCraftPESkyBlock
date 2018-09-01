@@ -72,5 +72,4 @@ public class ExpelSubCommand extends SubCommand {
         getPlugin().getIsland().kickPlayerByName(p, args[1]);
         return true;
     }
-
 }

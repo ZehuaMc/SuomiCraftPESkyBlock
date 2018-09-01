@@ -50,7 +50,6 @@ public class ConnectionUpdater {
      *
      */
     public void checkStatement() {
-        // TODO: BE DONE OF ALL OF AOF THESE WAR!UHS@H@Q(A)$@*#P@*
         try (Statement stmt = con.createStatement()) {
             ResultSet set = stmt.executeQuery("SELECT * FROM `island`");
             if (set.isClosed()) {
@@ -164,7 +163,6 @@ public class ConnectionUpdater {
                     this.igs.put(flag, false);
                 } else {
                     if (Settings.defaultIslandSettings.get(flag) == null) {
-                        //plugin.getLogger().info("DEBUG: null flag " + flag);
                         this.igs.put(flag, false);
                     } else {
                         this.igs.put(flag, Settings.defaultIslandSettings.get(flag));

@@ -238,7 +238,6 @@ public class ASkyBlock extends PluginBase {
     private void start() {
         initIslands();
         registerObject();
-        test();
     }
 
     public WorldSettings getSettings(String level) {
@@ -262,7 +261,6 @@ public class ASkyBlock extends PluginBase {
             try {
                 db = new ASConnection(this, new MySQLDatabase(cfg.getString("database.MySQL.host"), cfg.getInt("database.MySQL.port"), cfg.getString("database.MySQL.database"), cfg.getString("database.MySQL.username"), cfg.getString("database.MySQL.password")), true);
             } catch (SQLException ex) {
-                ////JDBCUtilities.printSQLException(ex);
             } catch (ClassNotFoundException | InterruptedException ex) {
                 Utils.send("Unable to create MySql database");
             }
@@ -270,7 +268,6 @@ public class ASkyBlock extends PluginBase {
             try {
                 db = new ASConnection(this, new SQLiteDatabase(new File(getDataFolder(), cfg.getString("database.SQLite.file-name") + ".db")), true);
             } catch (SQLException ex) {
-                ////JDBCUtilities.printSQLException(ex);
             } catch (ClassNotFoundException | InterruptedException ex) {
                 Utils.send("Unable to create MySql database");
             }
@@ -417,8 +414,5 @@ public class ASkyBlock extends PluginBase {
 
     public void setAvailableLocales(HashMap<String, ASlocales> availableLocales) {
         this.availableLocales = availableLocales;
-    }
-
-    private void test() {
     }
 }

@@ -179,10 +179,6 @@ public class IslandData implements Cloneable {
         Level level = Server.getInstance().getLevelByName(levelName);
         if (level != null && levelName != null) {
             // If the new nether is being used, islands exist in the nether too
-            //plugin.getLogger().info("DEBUG: target x = " + target.getBlockX() + " target z = " + target.getBlockZ());
-            //plugin.getLogger().info("DEBUG: min prot x = " + getMinProtectedX() + " min z = " + minProtectedZ);
-            //plugin.getLogger().info("DEBUG: max x = " + (getMinProtectedX() + protectionRange) + " max z = " + (minProtectedZ + protectionRange));
-
             if (target.getLevel().getName().equalsIgnoreCase(levelName)) {
                 if (target.getFloorX() >= getMinProtectedX()
                     && target.getFloorX() <= (getMinProtectedX() + protectionRange)
@@ -202,7 +198,6 @@ public class IslandData implements Cloneable {
      * @return true or false, or false if flag is not in the list
      */
     public boolean getIgsFlag(SettingsFlag flag) {
-        //plugin.getLogger().info("DEBUG: asking for " + flag + " = " + igs.get(flag));
         if (this.igs.containsKey(flag)) {
             return igs.get(flag);
         }
@@ -234,7 +229,6 @@ public class IslandData implements Cloneable {
                 this.igs.put(flag, false);
             } else {
                 if (Settings.defaultIslandSettings.get(flag) == null) {
-                    //plugin.getLogger().info("DEBUG: null flag " + flag);
                     this.igs.put(flag, false);
                 } else {
                     this.igs.put(flag, Settings.defaultIslandSettings.get(flag));
@@ -249,7 +243,6 @@ public class IslandData implements Cloneable {
     public String getSettings() {
         String result = "";
         // Personal island protection settings - serialize enum into 1's and 0's representing the boolean values
-        //plugin.getLogger().info("DEBUG: igs = " + igs.toString());
         try {
             ArrayList<Boolean> FANTASTIC = new ArrayList<>();
             for (Boolean f : igs.values()) {

@@ -96,5 +96,4 @@ public interface ContentHandler {
      * @throws ParseException
      */
     boolean primitive(Object value) throws ParseException, IOException;
-
 }

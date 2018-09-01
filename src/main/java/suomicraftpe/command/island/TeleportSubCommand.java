@@ -65,5 +65,4 @@ public class TeleportSubCommand extends SubCommand {
         getPlugin().getIsland().teleportPlayer(p, args[1]);
         return true;
     }
-
 }

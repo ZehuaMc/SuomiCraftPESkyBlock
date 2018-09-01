@@ -32,11 +32,9 @@ import java.sql.*;
  */
 public class JDBCUtilities {
     public static void getWarningsFromResultSet(ResultSet rs) throws SQLException {
-        //JDBCUtilities.printWarnings(rs.getWarnings());
     }
 
     public static void getWarningsFromStatement(Statement stmt) throws SQLException {
-        //JDBCUtilities.printWarnings(stmt.getWarnings());
     }
 
     public static void printWarnings(SQLWarning warning) throws SQLException {
@@ -113,7 +111,6 @@ public class JDBCUtilities {
     public static String convertDocumentToString(Document doc) throws
         TransformerException {
         Transformer t = TransformerFactory.newInstance().newTransformer();
-//    t.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
         StringWriter sw = new StringWriter();
         t.transform(new DOMSource(doc), new StreamResult(sw));
         return sw.toString();

@@ -229,5 +229,4 @@ public class IslandBlock extends BlockMinecraftId {
     public Vector3 getVector() {
         return new Vector3(x, y, z);
     }
-
 }

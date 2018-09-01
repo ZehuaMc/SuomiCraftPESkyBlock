@@ -115,5 +115,4 @@ public class LocaleSubCommand extends SubCommand {
             player.sendMessage(entry.getKey() + ": " + entry.getValue());
         }
     }
-
 }
