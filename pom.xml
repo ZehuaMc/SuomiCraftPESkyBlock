@@ -33,9 +33,6 @@
             <scope>system</scope>
             <systemPath>${basedir}/lib/Nukkit-SuomiCraftPE.jar</systemPath>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc -->
-        <!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
-        <!-- D:\Backup Desktop\Nukkit\plugins\ASkyBlock-Maven\lib\EconomyAPI-1.0.1.jar -->
         <dependency>
             <groupId>EconomyAPI</groupId>
             <artifactId>EconomyAPI</artifactId>

@@ -36,7 +36,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class Utils {
 
-    public static String LOCALES_DIRECTORY = "plugins" + File.separator + "ASkyBlock" + File.separator + "locale";
+    public static String LOCALES_DIRECTORY = "plugins" + File.separator + "SkyBlock" + File.separator + "locale";
     public static String DIRECTORY = ASkyBlock.get().getDataFolder() + File.separator;
     public static ConcurrentHashMap<String, Long> tooSoon = new ConcurrentHashMap<>();
 
@@ -259,7 +259,6 @@ public class Utils {
         try {
             Server.getInstance().getLogger().info(ASkyBlock.get().getPrefix() + TextFormat.GREEN + msg.replace("&", "§"));
         } catch (Throwable exc) {
-            System.out.println("ASkyBlock failed to send: " + msg);
         }
     }
 

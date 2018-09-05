@@ -134,7 +134,6 @@ public final class ASlocales {
     // Titles
     public String islandSubTitle = "Welcome back to [player] island!";
     public String islandDonate = "§aSource code made by §e@larryTheCoder";
-    public String islandURL = "§aLink: http://github.com/larryTheCoder/ASkyBlock-Nukkit";
     public String islandSupport = "§aLove it? Give us a star on GitHub!";
     public String islandTitle = "Welcome to [player]'s island";
     public String groundNoAir = "§eWhat do you think you are? You can't set home on air!";
