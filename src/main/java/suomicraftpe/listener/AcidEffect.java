@@ -16,6 +16,7 @@
  */
 package suomicraftpe.listener;
 
+import suomicraftpe.storage.WorldSettings;
 import cn.nukkit.Player;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.EventPriority;
@@ -37,6 +38,7 @@ public class AcidEffect implements Listener {
     private final ASkyBlock plugin;
     private final List<Player> burningPlayers = new ArrayList<>();
     private final List<Player> wetPlayers = new ArrayList<>();
+    @SuppressWarnings("unused")
     private boolean isRaining = false;
 
     public AcidEffect(final ASkyBlock pluginI) {
@@ -134,9 +136,10 @@ public class AcidEffect implements Listener {
     @EventHandler(priority = EventPriority.NORMAL)
     public void onWeatherChange(final WeatherChangeEvent e) {
         // Check that they are in the ASkyBlock world
-        if (!plugin.level.contains(e.getLevel().getName())) {
-            return;
+        for (WorldSettings ws : plugin.level) {
+            if (ws.getLevel().getName().equals(e.getLevel().getName())) {
+                this.isRaining = e.toWeatherState();
+            }
         }
-        this.isRaining = e.toWeatherState();
     }
 }

@@ -160,7 +160,6 @@ public class TaskManager {
         return task.getTaskId();
     }
 
-    @SuppressWarnings("deprecation")
     public int taskRepeatAsync(Runnable r, int interval) {
         TaskHandler task = ASkyBlock.get().getServer().getScheduler().scheduleRepeatingTask(ASkyBlock.get(), r, interval, true);
         return task.getTaskId();

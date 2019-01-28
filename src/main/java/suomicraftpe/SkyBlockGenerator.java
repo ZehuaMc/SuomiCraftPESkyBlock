@@ -34,7 +34,6 @@ public class SkyBlockGenerator extends Generator {
     public static final int TYPE_SKYBLOCK = 0x7eabbff;
     private final Map<String, Object> options;
     private ChunkManager level;
-    private NukkitRandom random;
 
     public SkyBlockGenerator(Map<String, Object> options) {
         this.options = options;
@@ -48,7 +47,6 @@ public class SkyBlockGenerator extends Generator {
     @Override
     public void init(ChunkManager cm, NukkitRandom nr) {
         this.level = cm;
-        this.random = nr;
     }
 
     @Override

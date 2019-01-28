@@ -63,22 +63,26 @@ public class AdminCMD extends Command {
         switch (args[0]) {
             case "help":
                 this.sendHelp(sender, commandLabel, args);
-                break;
+                return true;
             case "generate":
                 if (!sender.hasPermission("is.admin.generate")) {
                     sender.sendMessage(plugin.getLocale(p).errorNoPermission);
-                    break;
+                    return true;
                 }
 
                 if (args.length <= 1) {
                     sender.sendMessage(plugin.getPrefix() + "§aUsage: /" + commandLabel + " generate <level>");
-                    break;
+                    return true;
                 }
 
-                if (plugin.level.contains(args[1])) {
-                    sender.sendMessage(plugin.getPrefix() + plugin.getLocale(p).errorLevelGenerated);
-                    return true;
-                } else if (!plugin.getServer().isLevelGenerated(args[1])) {
+                for (WorldSettings ws : plugin.level) {
+                    if (ws.getLevel().getName().equals(args[1])) {
+                        sender.sendMessage(plugin.getPrefix() + plugin.getLocale(p).errorLevelGenerated);
+                        return true;
+                    }
+                }
+
+                if (!plugin.getServer().isLevelGenerated(args[1])) {
                     plugin.getServer().generateLevel(args[1], System.currentTimeMillis(), SkyBlockGenerator.class);
                     plugin.getServer().loadLevel(args[1]);
                     plugin.level.add(new WorldSettings(plugin.getServer().getLevelByName(args[1])));
@@ -86,87 +90,72 @@ public class AdminCMD extends Command {
                     sender.sendMessage(plugin.getPrefix() + plugin.getLocale(p).generalSuccess);
                     return true;
                 }
+
                 sender.sendMessage(plugin.getPrefix() + plugin.getLocale(p).errorLevelGenerated);
-                break;
+                return true;
             case "kick":
                 if (args.length <= 1) {
                     sender.sendMessage(plugin.getPrefix() + "§aUsage: /" + commandLabel + " kick <player>");
-                    break;
+                    return true;
                 }
 
                 if (!sender.hasPermission("is.admin.kick")) {
                     sender.sendMessage(plugin.getLocale(p).errorNoPermission);
-                    break;
+                    return true;
                 }
                 plugin.getIsland().kickPlayerByAdmin(sender, args[1]);
-                break;
+                return true;
             case "rename":
                 if (!sender.hasPermission("is.admin.rename")) {
                     sender.sendMessage(plugin.getLocale(p).errorNoPermission);
-                    break;
+                    return true;
                 }
 
                 if (args.length <= 2) {
                     sender.sendMessage(plugin.getPrefix() + "§aUsage: /" + commandLabel + " rename <player> <name>");
-                    break;
+                    return true;
                 }
 
                 IslandData pd = plugin.getIslandInfo(args[1]);
                 if (pd == null) {
                     sender.sendMessage(plugin.getPrefix() + plugin.getLocale(p).errorNoIslandOther);
-                    break;
+                    return true;
                 }
                 pd.setName(args[2]);
                 boolean success = plugin.getDatabase().saveIsland(pd);
                 if (success) {
                     sender.sendMessage(plugin.getPrefix() + plugin.getLocale(p).renameSuccess);
-                    break;
+                    return true;
                 } else {
                     sender.sendMessage(plugin.getPrefix() + plugin.getLocale(p).errorFailedNormal);
-                    break;
+                    return true;
                 }
             case "delete":
-                if (p == null) {
-                    sender.sendMessage(plugin.getLocale(p).errorUseInGame);
-                    break;
+                if (args.length <= 1) {
+                    sender.sendMessage(plugin.getPrefix() + "§aUsage: /" + commandLabel + " delete <player>");
+                    return true;
                 }
 
                 if (!sender.hasPermission("is.admin.delete")) {
                     sender.sendMessage(plugin.getLocale(p).errorNoPermission);
-                    break;
-                }
-
-                // Get the island I am on
-                IslandData island = plugin.getIsland().GetIslandAt(p);
-
-                // Try to get the owner of this island
-                String owner = island.getOwner();
-                if (!args[1].equalsIgnoreCase("confirm")) {
-                    sender.sendMessage(plugin.getPrefix() + plugin.getLocale(p).adminDeleteIslandError.replace("[player]", owner));
                     return true;
                 }
 
+                IslandData island = plugin.getIslandInfo(args[1]);
                 if (island == null) {
-                    sender.sendMessage(plugin.getLocale(p).adminDeleteIslandnoid);
+                    sender.sendMessage(plugin.getLocale(p).errorNoIslandOther);
                     return true;
                 }
-
-                if (owner != null) {
-                    sender.sendMessage(plugin.getLocale(p).adminSetSpawnOwnedBy.replace("[name]", owner));
-                    sender.sendMessage(plugin.getLocale(p).adminDeleteIslandUse.replace("[name]", owner));
-                    return true;
-                } else {
-                    sender.sendMessage(plugin.getLocale(p).deleteRemoving.replace("[name]", owner));
-                    deleteIslands(island, sender);
-                }
-                break;
+                sender.sendMessage(plugin.getLocale(p).deleteRemoving.replace("[name]", args[1]));
+                deleteIslands(island, sender);
+                return true;
             case "setspawn":
                 this.setSpawn(sender);
                 break;
             case "addmessage":
                 if (!sender.hasPermission("is.admin.delete")) {
                     sender.sendMessage(plugin.getLocale(p).errorNoPermission);
-                    break;
+                    return true;
                 }
 
                 String msg = "";
@@ -191,7 +180,7 @@ public class AdminCMD extends Command {
                 }
             default:
                 this.sendHelp(sender, commandLabel, args);
-                break;
+                return true;
         }
 
         return true;

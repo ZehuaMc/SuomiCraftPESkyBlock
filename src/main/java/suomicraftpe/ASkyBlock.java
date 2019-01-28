@@ -147,7 +147,12 @@ public class ASkyBlock extends PluginBase {
     }
 
     public boolean inIslandWorld(Player p) {
-        return level.contains(p.getLevel().getName());
+        for (WorldSettings ws : level) {
+            if (ws.getLevel().getName().equals(p.getLevel().getName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public PlayerData getPlayerInfo(Player player) {
@@ -220,11 +225,7 @@ public class ASkyBlock extends PluginBase {
     public void onEnable() {
         initDatabase();
         generateLevel();
-        if (cfg.getBoolean("fastLoad")) {
-            TaskManager.runTaskLater(() -> start(), 100);
-        } else {
-            start();
-        }
+        TaskManager.runTaskLater(() -> start(), 100);
     }
 
     public ArrayList<String> getLevels() {
@@ -335,22 +336,8 @@ public class ASkyBlock extends PluginBase {
             saveResource("challenges.yml");
         }
         cfg = new Config(new File(getDataFolder(), "config.yml"), Config.YAML);
-        recheck();
-        ConfigManager.load();
-    }
-
-    public void recheck() {
-        boolean update = false;
-        File file;
-        Config cfgg = new Config(file = new File(ASkyBlock.get().getDataFolder(), "config.yml"), Config.YAML);
-        if (!cfgg.getString("version").equalsIgnoreCase(ConfigManager.CONFIG_VERSION)) {
-            update = true;
-        }
-        if (update) {
-            file.renameTo(new File(ASkyBlock.get().getDataFolder(), "config.old"));
-            ASkyBlock.get().saveResource("config.yml");
-        }
         cfg.reload();
+        ConfigManager.load();
     }
 
     private void generateLevel() {

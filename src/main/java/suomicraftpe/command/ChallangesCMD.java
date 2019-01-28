@@ -504,7 +504,6 @@ public final class ChallangesCMD extends Command {
                         } else if (part[0].equalsIgnoreCase("skull")) {
                             part[0] = "SKULL_ITEM";
                         }
-                        // TODO: add netherwart vs. netherstalk?
                         if (Utils.isNumeric(part[0])) {
                             reqItem = Item.get(Integer.parseInt(part[0]));
                         } else {
@@ -941,14 +940,8 @@ public final class ChallangesCMD extends Command {
                     }
                     rewardQty = Integer.parseInt(element[2]);
                     // Check for POTION
-                    if (rewardItem.equals(Item.POTION)) {
+                    if (rewardItem instanceof ItemPotion) {
                         givePotion(player, rewardedItems, element, rewardQty);
-                    } else {
-                        Item item = null;
-                        // Normal item, not a potion, check if it is a Monster Egg
-                        if (rewardItem.equals(Item.MONSTER_EGG)) {
-
-                        }
                     }
                 } catch (Exception e) {
                     player.sendMessage(TextFormat.RED + "There was a problem giving your reward. Ask Admin to check log!");
@@ -990,14 +983,13 @@ public final class ChallangesCMD extends Command {
                 }
             }
         }
-        //todo
         return rewardedItems;
     }
 
     private void runCommands(Player player, List<String> commands) {
         for (String cmd : commands) {
             if (cmd.startsWith("[SELF]")) {
-                plugin.getLogger().info("Running command '" + cmd + "' as " + player.getName());
+                //plugin.getLogger().info("Running command '" + cmd + "' as " + player.getName());
                 cmd = cmd.substring(6, cmd.length()).replace("[player]", player.getName()).trim();
                 try {
                     plugin.getServer().dispatchCommand(player, cmd);
@@ -1047,6 +1039,7 @@ public final class ChallangesCMD extends Command {
      * @param configFile that is being used
      * @return ItemStack of the potion
      */
+    @SuppressWarnings("unused")
     private Item getPotion(String[] element, int rewardQty, String configFile) {
         // Check for potion aspects
         boolean splash = false;

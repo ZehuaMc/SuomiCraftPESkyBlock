@@ -28,6 +28,7 @@ import suomicraftpe.ASkyBlock;
 import suomicraftpe.events.IslandCreateEvent;
 import suomicraftpe.player.PlayerData;
 import suomicraftpe.storage.IslandData;
+import suomicraftpe.storage.WorldSettings;
 import suomicraftpe.task.DeleteIslandTask;
 import suomicraftpe.task.TaskManager;
 import suomicraftpe.utils.Settings;
@@ -230,11 +231,15 @@ public class IslandManager {
     }
 
     public boolean isPlayerIsland(Player p, Location loc) {
-        if (!plugin.level.contains(loc.getLevel().getName())) {
-            return false;
+        for (WorldSettings ws : plugin.level) {
+            if (ws.getLevel().getName().equals(p.getLevel().getName())) {
+                if (plugin.getIslandInfo(loc).getOwner() == null) {
+                    return false;
+                }
+                return plugin.getIslandInfo(loc).getOwner().equalsIgnoreCase(p.getName());
+            }
         }
-
-        return plugin.getIslandInfo(loc).getOwner().equalsIgnoreCase(p.getName());
+        return false;
     }
 
     public void deleteIsland(Player p, IslandData pd) {

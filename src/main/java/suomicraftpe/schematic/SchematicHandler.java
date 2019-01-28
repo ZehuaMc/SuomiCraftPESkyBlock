@@ -19,7 +19,6 @@ package suomicraftpe.schematic;
 import cn.nukkit.Player;
 import cn.nukkit.block.Block;
 import cn.nukkit.block.BlockSapling;
-import cn.nukkit.item.Item;
 import cn.nukkit.level.Level;
 import cn.nukkit.level.Position;
 import cn.nukkit.level.generator.biome.Biome;
@@ -95,7 +94,6 @@ public final class SchematicHandler {
         schematicList = Lists.newArrayList();
         configKey = Maps.newHashMap();
         // List all of the files
-        File[] lists = path.listFiles();
         List<File> list = new ArrayList<>();
         File configPath = new File(path, "configuration.yml");
 
@@ -207,9 +205,6 @@ public final class SchematicHandler {
                     CompoundTag nbt = (CompoundTag) tag;
                     EntityObject ent = new EntityObject();
                     for (Map.Entry<String, Tag> entry : nbt.getValue().entrySet()) {
-                        if (entry.getKey().equals("id")) {
-                            String ide = ((StringTag) entry.getValue()).getValue().toUpperCase();
-                        }
 
                         switch (entry.getKey()) {
                             case "Pos":
@@ -427,7 +422,6 @@ public final class SchematicHandler {
         if (this.bedrock.get(id) != null) {
             EndRock = this.bedrock.get(id).get();
         }
-        Map<Vector3, Map<String, Tag>> TileEntities = tileEntitiesMap;
         for (int x = 0; x < width; ++x) {
             for (int y = 0; y < height; ++y) {
                 for (int z = 0; z < length; ++z) {
@@ -604,15 +598,13 @@ public final class SchematicHandler {
         int X = pos.getFloorX();
         int Z = pos.getFloorZ();
         Level world = pos.level;
+
         // bedrock - ensures island are not overwritten
-        for (int x = X; x < X + 1; ++x) {
-            for (int z = Z; z < Z + 1; ++z) {
-                world.setBlockIdAt(x, groundHeight, z, Block.BEDROCK);
-            }
-        }
+        world.setBlockIdAt(X, groundHeight, Z, Block.BEDROCK);
+
         // Add some dirt and grass
         for (int x = X - 1; x < X + 2; ++x) {
-            for (int z = X - 1; z < X + 2; ++z) {
+            for (int z = Z - 1; z < Z + 2; ++z) {
                 world.setBlockIdAt(x, groundHeight + 1, z, Block.DIRT);
                 world.setBlockIdAt(x, groundHeight + 2, z, Block.DIRT);
             }
@@ -648,12 +640,14 @@ public final class SchematicHandler {
                 world.setBlockIdAt(x_space, groundHeight + 1, z_space, Block.AIR);
             }
         }
+
         // Sand
         world.setBlockIdAt(X, groundHeight + 1, Z, Block.SAND);
         world.setBlockIdAt(X, groundHeight + 2, Z, Block.SAND);
         world.setBlockIdAt(X, groundHeight + 3, Z, Block.SAND);
         world.setBlockIdAt(X, groundHeight + 4, Z, Block.SAND);
         world.setBlockIdAt(X, groundHeight + 5, Z, Block.SAND);
+
         // Tree
         ObjectTree.growTree(world, X, groundHeight + 7, Z, new NukkitRandom(), BlockSapling.OAK);
     }

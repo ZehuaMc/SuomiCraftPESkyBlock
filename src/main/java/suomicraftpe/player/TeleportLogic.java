@@ -48,7 +48,6 @@ public class TeleportLogic implements Listener {
     private final Map<UUID, PendingTeleport> pendingTPs = new ConcurrentHashMap<>();
     private final double cancelDistance;
 
-    @SuppressWarnings("LeakingThisInConstructor")
     public TeleportLogic(ASkyBlock plugin) {
         this.plugin = plugin;
         teleportDelay = plugin.getConfig().getInt("general.islandTeleportDelay", 2);
@@ -102,14 +101,6 @@ public class TeleportLogic implements Listener {
         private PendingTeleport(Location location, TaskHandler task) {
             this.location = location != null ? location.clone() : null;
             this.task = task;
-        }
-
-        public Location getLocation() {
-            return location;
-        }
-
-        public TaskHandler getTask() {
-            return task;
         }
 
         public void playerMoved(Player player) {

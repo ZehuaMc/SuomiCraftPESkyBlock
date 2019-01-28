@@ -18,11 +18,9 @@ package suomicraftpe.schematic;
 
 import cn.nukkit.block.Block;
 import cn.nukkit.blockentity.BlockEntity;
-import cn.nukkit.blockentity.BlockEntityChest;
 import cn.nukkit.item.Item;
 import cn.nukkit.level.Location;
 import cn.nukkit.level.Position;
-import cn.nukkit.level.format.generic.BaseFullChunk;
 import cn.nukkit.level.generator.biome.Biome;
 import cn.nukkit.math.Vector3;
 import suomicraftpe.ASkyBlock;
@@ -44,8 +42,6 @@ public class IslandBlock extends BlockMinecraftId {
     private final int x;
     private final int y;
     private final int z;
-    // Current island id
-    private final int islandId;
     // Chest contents
     private final HashMap<Integer, Item> chestContents;
     private short typeId;
@@ -61,7 +57,6 @@ public class IslandBlock extends BlockMinecraftId {
         this.x = x;
         this.y = y;
         this.z = z;
-        this.islandId = islandId;
         signText = null;
         chestContents = new HashMap<>();
     }
@@ -153,7 +148,6 @@ public class IslandBlock extends BlockMinecraftId {
                                 // Special case for non-standard material names
                                 int itemMaterial;
 
-                                //Bukkit.getLogger().info("DEBUG: " + material);
                                 if (WETOME.containsKey(material)) {
                                     itemMaterial = WETOME.get(material);
                                 } else {

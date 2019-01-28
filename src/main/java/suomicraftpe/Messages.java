@@ -17,7 +17,6 @@
 package suomicraftpe;
 
 import cn.nukkit.Player;
-import cn.nukkit.utils.Config;
 
 import java.util.ArrayList;
 import java.util.Arrays;

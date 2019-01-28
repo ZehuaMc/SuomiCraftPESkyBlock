@@ -183,7 +183,7 @@ public class GridManager {
             if (isSafeLocation(locPlusOne)) {
                 // Adjust the home location accordingly
                 pd.setHomeLocation(locPlusOne);
-                deb.debug("Seccess");
+                deb.debug("TP success");
                 return locPlusOne;
             }
 
@@ -194,7 +194,7 @@ public class GridManager {
                 if (isSafeLocation(locPlusY)) {
                     // Adjust the home location accordingly
                     pd.setHomeLocation(locPlusY);
-                    deb.debug("Seccess");
+                    deb.debug("TP success");
                     return locPlusY.getLocation();
                 }
             }
@@ -210,7 +210,7 @@ public class GridManager {
                         Position pos = locPlusOne.setComponents(x, y, z);
                         if (isSafeLocation(pos)) {
                             pd.setHomeLocation(pos);
-                            deb.debug("Seccess " + count);
+                            deb.debug("Success " + count);
                             deb.debug(pos.toString());
                             return pos.getLocation();
                         }
@@ -265,6 +265,7 @@ public class GridManager {
             inv.addItem(Item.get(Item.STEAK, 0, 1));
             inv.addItem(Item.get(Item.SEEDS, 0, 3));
             inv.addItem(Item.get(Item.CACTUS, 0, 1));
+            inv.addItem(Item.get(Item.LEATHER_BOOTS, 0, 1));
         }
         return true;
     }

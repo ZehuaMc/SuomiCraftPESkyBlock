@@ -17,7 +17,6 @@
 package suomicraftpe.player;
 
 import cn.nukkit.Player;
-import cn.nukkit.level.Location;
 import cn.nukkit.utils.TextFormat;
 import suomicraftpe.ASkyBlock;
 import suomicraftpe.storage.IslandData;
@@ -93,11 +92,9 @@ public class TeamManager {
     private boolean kick(Player p, PlayerData td) {
         if (plugin.level.contains(p.getLevel().getName())) {
             String st = td.leader;
-            IslandData pd = plugin.getDatabase().getIsland(p.getName(), 1);
             IslandData p1 = plugin.getDatabase().getIsland(st, 1);
             if (plugin.getIsland().generateIslandKey(p.getLocation()) == p1.getIslandId()) {
-                //kick the player
-                p.teleport(new Location());
+                p.teleport(plugin.getServer().getDefaultLevel().getSafeSpawn());
             }
         }
         return true;

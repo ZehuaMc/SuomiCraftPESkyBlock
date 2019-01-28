@@ -57,7 +57,6 @@ public class IslandData implements Cloneable {
     // Protection size
     private int protectionRange = 0;
 
-    @SuppressWarnings("OverridableMethodCallInConstructor")
     public IslandData(String levelName, int X, int Z, int PSize) {
         this.centerX = X;
         this.centerZ = Z;
@@ -67,7 +66,6 @@ public class IslandData implements Cloneable {
         setIgsDefaults();
     }
 
-    @SuppressWarnings({"AssignmentToMethodParameter", "OverridableMethodCallInConstructor"})
     public IslandData(String levelName, int X, int Y, int Z, int homeX, int homeY, int homeZ, int PSize, String name, String owner, String biome, int id, int islandId, boolean locked, String defaultvalue, boolean isSpawn) {
         if (biome.isEmpty()) {
             biome = "PLAINS";

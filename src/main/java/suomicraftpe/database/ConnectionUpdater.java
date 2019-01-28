@@ -103,6 +103,7 @@ public class ConnectionUpdater {
         }
     }
 
+    @SuppressWarnings("unused")
     private class IndependantIsland {
 
         private final HashMap<IslandData.SettingsFlag, Boolean> igs = new HashMap<>();

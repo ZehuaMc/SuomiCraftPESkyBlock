@@ -258,8 +258,7 @@ public class Utils {
     public static void send(String msg) {
         try {
             Server.getInstance().getLogger().info(ASkyBlock.get().getPrefix() + TextFormat.GREEN + msg.replace("&", "§"));
-        } catch (Throwable exc) {
-        }
+        } catch (Throwable exc) {}
     }
 
     public static String convertTimer(long ms) {

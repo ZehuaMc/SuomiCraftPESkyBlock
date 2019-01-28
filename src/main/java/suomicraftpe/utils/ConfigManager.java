@@ -34,15 +34,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 /**
  * @author Adam Matthew
  */
 public class ConfigManager {
-
-    public static final String CONFIG_VERSION = "SuomiCraftPE";
 
     /**
      * Loads the various settings from the config.yml file into the plugin
@@ -116,7 +113,6 @@ public class ConfigManager {
         // Check chest items
         if (!chestItems.isEmpty()) {
             final String[] chestItemString = chestItems.split(" ");
-            // getLogger().info("DEBUG: chest items = " + chestItemString);
             final Item[] tempChest = new Item[chestItemString.length];
             for (int i = 0; i < tempChest.length; i++) {
                 String[] amountdata = chestItemString[i].split(":");
@@ -182,17 +178,17 @@ public class ConfigManager {
         Settings.defaultIslandSettings.clear();
         Settings.defaultSpawnSettings.clear();
         Settings.visitorSettings.clear();
-        ConfigSection protectionWorld = cfg.getSections("protection.world");
-        for (Iterator<String> it = protectionWorld.getKeys(false).iterator(); it.hasNext(); ) {
-            String setting = it.next();
+        ConfigSection protectionWorld = cfg.getSection("protection.world");
+        for (String setting : protectionWorld.getKeys(false)) {
             try {
                 SettingsFlag flag = SettingsFlag.valueOf(setting.toUpperCase());
-                boolean value = cfg.getBoolean("protection.world." + flag.name());
+                boolean value = cfg.getBoolean("protection.world." + setting);
                 Settings.defaultWorldSettings.put(flag, value);
                 Settings.defaultSpawnSettings.put(flag, value);
                 Settings.defaultIslandSettings.put(flag, value);
+
             } catch (Exception e) {
-                Utils.send("Unknown setting in config.yml:protection.world " + setting.toUpperCase() + " skipping...");
+                Utils.send("&cUnknown setting in config.yml:protection.world " + setting.toUpperCase() + " skipping...");
             }
         }
         // Get the default language
@@ -204,7 +200,6 @@ public class ConfigManager {
         try {
             int index = 1;
             for (String code : fl.list()) {
-                //plugin.getLogger().info("DEBUG: lang file = " + code);
                 availableLocales.put(code, new ASlocales(ASkyBlock.get(), code, index++));
             }
         } catch (IOException e1) {
@@ -216,8 +211,6 @@ public class ConfigManager {
             availableLocales.put(Settings.defaultLanguage, new ASlocales(ASkyBlock.get(), Settings.defaultLanguage, 0));
         }
         ASkyBlock.get().setAvailableLocales(availableLocales);
-        // GridProtection
-        Settings.shouldTeleportSpawn = cfg.getBoolean("grid.teleportSpawn", false);
     }
 
     private static void scheduleCheck(boolean flag, Config cfg) {
@@ -231,7 +224,7 @@ public class ConfigManager {
                     scheduleCheck(true, cfg);
                 }, 3); // 3 sec
             } else if (plugin != null && plugin.isEnabled()) {
-                Utils.send("&eSeccessfully created an instance with Economy plugin");
+                Utils.send("&eSuccessfully created an instance with Economy plugin");
                 ASkyBlock.econ = new EconomyAPI();
                 Settings.useEconomy = true;
             } else {

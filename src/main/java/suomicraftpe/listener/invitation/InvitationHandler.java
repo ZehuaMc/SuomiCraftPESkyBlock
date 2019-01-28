@@ -53,7 +53,6 @@ public class InvitationHandler {
      *
      * @return HashMap<>
      */
-    @SuppressWarnings("ReturnOfCollectionOrArrayField")
     public HashMap<Player, Invitation> getInvitations() {
         return invitation;
     }

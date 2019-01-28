@@ -4,9 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <name>ASkyBlock</name>
-    <groupId>larryTheCoder</groupId>
+    <groupId>suomicraftpe</groupId>
     <artifactId>SkyBlock</artifactId>
-    <version>0.5</version>
+    <version>0.6-S</version>
 
     <licenses>
         <license>

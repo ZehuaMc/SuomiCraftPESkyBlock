@@ -22,8 +22,6 @@ import cn.nukkit.command.ConsoleCommandSender;
 import cn.nukkit.command.PluginCommand;
 import cn.nukkit.utils.TextFormat;
 import suomicraftpe.command.SubCommand;
-import suomicraftpe.command.chat.ChatSubCommand;
-import suomicraftpe.command.chat.MessageSubCommand;
 import suomicraftpe.command.generic.ExpelSubCommand;
 import suomicraftpe.command.generic.LeaveSubCommand;
 import suomicraftpe.command.island.*;
@@ -43,11 +41,9 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Commands extends PluginCommand<ASkyBlock> {
 
     private final List<SubCommand> commands = new ArrayList<>();
-    private final List<String> listOfPlayers = new ArrayList<>();
     private final ConcurrentHashMap<String, Integer> SubCommand = new ConcurrentHashMap<>();
     private final ASkyBlock plugin;
 
-    @SuppressWarnings({"unchecked", "OverridableMethodCallInConstructor"})
     public Commands(ASkyBlock plugin) {
         super("is", plugin);
         this.setAliases(new String[]{"sky", "island", "skyblock"});
@@ -56,7 +52,6 @@ public class Commands extends PluginCommand<ASkyBlock> {
         this.plugin = plugin;
 
         this.loadSubCommand(new AcceptSubCommand(getPlugin()));
-        this.loadSubCommand(new ChatSubCommand(getPlugin()));
         this.loadSubCommand(new CreateISubCommand(getPlugin()));
         this.loadSubCommand(new DeleteSubCommand(getPlugin()));
         this.loadSubCommand(new DenySubCommand(getPlugin()));
@@ -65,7 +60,6 @@ public class Commands extends PluginCommand<ASkyBlock> {
         this.loadSubCommand(new InfoSubCommand(getPlugin()));
         this.loadSubCommand(new InviteSubCommand(getPlugin()));
         this.loadSubCommand(new LeaveSubCommand(getPlugin()));
-        this.loadSubCommand(new MessageSubCommand(getPlugin()));
         this.loadSubCommand(new SetHomeSubCommand(getPlugin()));
         this.loadSubCommand(new SettingsSubCommand(getPlugin()));
         this.loadSubCommand(new TeleportSubCommand(getPlugin()));
@@ -175,24 +169,10 @@ public class Commands extends PluginCommand<ASkyBlock> {
                 helpList.add("§eis " + cmd.getName() + TextFormat.GRAY + " => §a" + cmd.getDescription());
             }
         }
-        helpList.add("§eis version" + TextFormat.GRAY + " => §aGets the current module version.");
-        helpList.add("§eis about" + TextFormat.GRAY + " => §aListen to what this author say.");
-        helpList.add("§eis author" + TextFormat.GRAY + " => §aThanks for your contributions.");
 
         if (sender.hasPermission("is.admin.command")) {
             helpList.add("§eisa" + TextFormat.GRAY + " => §aThe admin command Module");
         }
-
-        helpList.add("");
-        helpList.add("§eHere is the another tips for your new island.");
-        helpList.add("§eYou can break your island but not others island.");
-        helpList.add("§eYou also can made an ally to able players come your island.");
-        helpList.add("§ePeople cannot enter your island, break, grief any blocks in your island without permission.\"");
-        helpList.add("");
-        helpList.add("§eYou may not understand some commands but you will get it soon.");
-        helpList.add("§eAdmin or OP can do anything on your island (Including deleting).");
-        helpList.add("§eYou can kick player but not OP's");
-        helpList.add("§eYou can chat with your team privately but the Admin can spying on you");
 
         int totalPage = helpList.size() % pageHeight == 0 ? helpList.size() / pageHeight : helpList.size() / pageHeight + 1;
         pageNumber = Math.min(pageNumber, totalPage);

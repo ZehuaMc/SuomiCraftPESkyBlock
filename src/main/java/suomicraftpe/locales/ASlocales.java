@@ -20,10 +20,7 @@ import cn.nukkit.utils.Config;
 import suomicraftpe.ASkyBlock;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Locale;
-import java.util.Set;
 
 /**
  * All the text strings in the game sent to players This version enables
@@ -36,24 +33,6 @@ import java.util.Set;
  */
 public final class ASlocales {
 
-    private final static Set<String> TITLE_COLORS = new HashSet<>(Arrays.asList(
-        "black",
-        "dark_blue",
-        "dark_green",
-        "dark_aqua",
-        "dark_red",
-        "dark_purple",
-        "gold",
-        "gray",
-        "dark_gray",
-        "blue",
-        "green",
-        "aqua",
-        "red",
-        "light_purple",
-        "yellow",
-        "white"
-    ));
     public String changingObsidiantoLava;
     public String acidLore;
     public String acidBucket;
@@ -138,12 +117,12 @@ public final class ASlocales {
     public String islandTitle = "Welcome to [player]'s island";
     public String groundNoAir = "§eWhat do you think you are? You can't set home on air!";
     // Guard island
-    public String islandProtected = "§cThat island is protected";
+    public String islandProtected = "§cThis area is protected";
     // Panels
     public String panelIslandHeader = "§eWelcome to the Island Panel. Please fill in these forms.";
-    public String panelIslandHome = "§dYour Home Name.";
+    public String panelIslandHome = "§dYour Home Name";
     public String panelIslandTemplate = "§dIsland Templates";
-    public String panelIslandDefault = "§eThese are your island Settings.";
+    public String panelIslandDefault = "§eThese are your island settings";
     public String panelIslandWorld = "§dChoose your world";
     public String panelChallengesHeader = "§aChoose your toppings! All of these are your challenges to complete! You will be awarded with an amazing prize!";
     public String panelHomeHeader = "§eHere are all of the list of your islands. Choose one of these to [function]";
@@ -224,24 +203,6 @@ public final class ASlocales {
                         plugin.getLogger().emergency("Could not find any locale file!");
                     }
             }
-    }
-
-    /**
-     * Checks that the color supplied is a valid color
-     *
-     * @param string
-     * @return color
-     */
-    private String colorCheck(String string) {
-        string = string.toLowerCase();
-        if (TITLE_COLORS.contains(string)) {
-            return string;
-        }
-        plugin.getLogger().warning("Title color " + string + " is unknown. Use one from this list:");
-        TITLE_COLORS.stream().forEach((color) -> {
-            plugin.getLogger().warning(color);
-        });
-        return "white";
     }
 
     /**

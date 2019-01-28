@@ -62,7 +62,7 @@ public class AcceptSubCommand extends SubCommand {
         InvitationHandler pd = getPlugin().getInvitationHandler();
         if (pd.getInvitation(p) == null) {
             sender.sendMessage(getPrefix() + getLocale(p).errorNotPending);
-            return false;
+            return true;
         }
         pd.getInvitation(p).accept();
         return true;

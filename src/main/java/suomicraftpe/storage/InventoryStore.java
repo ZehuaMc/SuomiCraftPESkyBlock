@@ -49,7 +49,6 @@ class InventoryStore {
         });
     }
 
-    @SuppressWarnings("ReturnOfCollectionOrArrayField")
     public ArrayList<Item[]> getArmor() {
         return armor;
     }

@@ -25,8 +25,26 @@ challenges:
       repeatRewardText: '1 block of ice'
       repeatMoneyReward: 5
       repeatExpReward: 10
-      maxtimes: 2
-      resetallowed: true
+      maxtimes: 100
+    melonfarmer:
+      friendlyname: 'Melon Farmer'
+      description: 'Create 10 melon blocks'
+      icon: MELON
+      level: 'Default'
+      type: inventory
+      requiredItems: 'MELON_BLOCK:10'
+      takeItems: true
+      itemReward: 'SAND:0 SAND:0 SAND:0 SAND:0 SAND:0'
+      rewardText: '5 sand blocks'
+      moneyReward: 10
+      expReward: 30
+      permissionReward: ''
+      repeatable: true
+      repeatItemReward: 'SAND:0 SAND:0 SAND:0 SAND:0 SAND:0'
+      repeatRewardText: '5 sand blocks'
+      repeatMoneyReward: 5
+      repeatExpReward: 10
+      maxtimes: 100
     breadmaker:
       friendlyname: 'Bread Maker'
       description: 'Bake 21 loaves of bread'

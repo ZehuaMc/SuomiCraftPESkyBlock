@@ -28,7 +28,6 @@ import java.util.*;
 public class Settings {
     // system variables
     public static boolean useSchematicPanel;
-    public static boolean chooseIslandRandomly;
     public static List<String> challengeLevels = new ArrayList<>();
 
     // config variables
@@ -59,13 +58,9 @@ public class Settings {
     public static boolean stopTime;
 
     // default variables
-    public static String islandCompanion = "COW";
     public static Set<String> challengeList = new HashSet<>();
     public static List<String> freeLevels = new ArrayList<>();
     public static int waiverAmount = 0;
-
-    // GridProtection
-    public static boolean shouldTeleportSpawn = false;
 
 
     /**

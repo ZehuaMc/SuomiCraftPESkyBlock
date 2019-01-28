@@ -48,7 +48,6 @@ public class SQLiteDatabase implements AbstractDatabase {
             }
         }
         try {
-            java.util.Properties info = new java.util.Properties();
             this.connection = DriverManager.getConnection("jdbc:sqlite:" + this.dbLocation);
         } catch (SQLException ex) {
             forceConnection();
