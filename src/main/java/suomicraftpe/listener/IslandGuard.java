@@ -752,94 +752,15 @@ public class IslandGuard implements Listener {
 
     @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     public void onExplosion(final EntityExplodeEvent e) {
-        if (!inWorld(e.getPosition().getLocation())) {
-            return;
-        }
-        // Find out what is exploding
-        Entity expl = e.getEntity();
-        if (expl == null) {
-            // This allows beds to explode or other null entities, but still curtail the damage
-            // Note player can still die from beds exploding in the nether.
-            if (!Settings.allowTNTDamage) {
-                deb.debug("TNT block damage prevented");
-                e.getBlockList().clear();
-            } else {
-                if (!Settings.allowChestDamage) {
-                    List<Block> toberemoved = new ArrayList<>();
-                    // Save the chest blocks in a list
-                    for (Block b : e.getBlockList()) {
-                        switch (b.getId()) {
-                            case CHEST:
-                            case ENDER_CHEST:
-                            case MINECART_WITH_CHEST:
-                            case TRAPPED_CHEST:
-                                toberemoved.add(b);
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                    // Now delete them
-                    toberemoved.forEach((b) -> {
-                        e.getBlockList().remove(b);
-                    });
-                }
+        try {
+            if (!inWorld(e.getPosition().getLocation())) {
+                return;
             }
-            return;
-        }
-        // prevent at spawn
-        if (plugin.getGrid().isAtSpawn(e.getPosition().getLocation())) {
-            e.setCancelled(true);
-        }
-        // Find out what is exploding
-        Entity exploding = e.getEntity();
-        if (exploding == null) {
-            return;
-        }
-        switch (exploding.getNetworkId()) {
-            case EntityCreeper.NETWORK_ID:
-                if (!Settings.allowCreeperDamage) {
-                    deb.debug("Creeper block damage prevented");
-                    e.getBlockList().clear();
-                } else {
-                    // Check if creeper griefing is allowed
-                    if (!Settings.allowCreeperGriefing) {
-                        // Find out who the creeper was targeting
-//                        EntityCreeper creeper = (EntityCreeper) e.getEntity();
-//                        if (creeper.get() instanceof Player) {
-//                            Player target = (Player) creeper.getTarget();
-//                            // Check if the target is on their own island or not
-//                            if (!plugin.getGrid().locationIsOnIsland(target, e.getLocation())) {
-//                                // They are a visitor tsk tsk
-//                                // Stop the blocks from being damaged, but allow hurt still
-//                                e.getBlockList().clear();
-//                            }
-//                        }
-                    }
-                    if (!Settings.allowChestDamage) {
-                        List<Block> toberemoved = new ArrayList<>();
-                        // Save the chest blocks in a list
-                        for (Block b : e.getBlockList()) {
-                            switch (b.getId()) {
-                                case CHEST:
-                                case ENDER_CHEST:
-                                case MINECART_WITH_CHEST:
-                                case TRAPPED_CHEST:
-                                    toberemoved.add(b);
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                        // Now delete them
-                        toberemoved.forEach((b) -> {
-                            e.getBlockList().remove(b);
-                        });
-                    }
-                }
-                break;
-            case EntityPrimedTNT.NETWORK_ID:
-            case EntityMinecartTNT.NETWORK_ID:
+            // Find out what is exploding
+            Entity expl = e.getEntity();
+            if (expl == null) {
+                // This allows beds to explode or other null entities, but still curtail the damage
+                // Note player can still die from beds exploding in the nether.
                 if (!Settings.allowTNTDamage) {
                     deb.debug("TNT block damage prevented");
                     e.getBlockList().clear();
@@ -865,10 +786,91 @@ public class IslandGuard implements Listener {
                         });
                     }
                 }
-                break;
-            default:
-                break;
-        }
+                return;
+            }
+            // prevent at spawn
+            if (plugin.getGrid().isAtSpawn(e.getPosition().getLocation())) {
+                e.setCancelled(true);
+            }
+            // Find out what is exploding
+            Entity exploding = e.getEntity();
+            if (exploding == null) {
+                return;
+            }
+            switch (exploding.getNetworkId()) {
+                case EntityCreeper.NETWORK_ID:
+                    if (!Settings.allowCreeperDamage) {
+                        deb.debug("Creeper block damage prevented");
+                        e.getBlockList().clear();
+                    } else {
+                        // Check if creeper griefing is allowed
+                        if (!Settings.allowCreeperGriefing) {
+                            // Find out who the creeper was targeting
+    //                        EntityCreeper creeper = (EntityCreeper) e.getEntity();
+    //                        if (creeper.get() instanceof Player) {
+    //                            Player target = (Player) creeper.getTarget();
+    //                            // Check if the target is on their own island or not
+    //                            if (!plugin.getGrid().locationIsOnIsland(target, e.getLocation())) {
+    //                                // They are a visitor tsk tsk
+    //                                // Stop the blocks from being damaged, but allow hurt still
+    //                                e.getBlockList().clear();
+    //                            }
+    //                        }
+                        }
+                        if (!Settings.allowChestDamage) {
+                            List<Block> toberemoved = new ArrayList<>();
+                            // Save the chest blocks in a list
+                            for (Block b : e.getBlockList()) {
+                                switch (b.getId()) {
+                                    case CHEST:
+                                    case ENDER_CHEST:
+                                    case MINECART_WITH_CHEST:
+                                    case TRAPPED_CHEST:
+                                        toberemoved.add(b);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            // Now delete them
+                            toberemoved.forEach((b) -> {
+                                e.getBlockList().remove(b);
+                            });
+                        }
+                    }
+                    break;
+                case EntityPrimedTNT.NETWORK_ID:
+                case EntityMinecartTNT.NETWORK_ID:
+                    if (!Settings.allowTNTDamage) {
+                        deb.debug("TNT block damage prevented");
+                        e.getBlockList().clear();
+                    } else {
+                        if (!Settings.allowChestDamage) {
+                            List<Block> toberemoved = new ArrayList<>();
+                            // Save the chest blocks in a list
+                            for (Block b : e.getBlockList()) {
+                                switch (b.getId()) {
+                                    case CHEST:
+                                    case ENDER_CHEST:
+                                    case MINECART_WITH_CHEST:
+                                    case TRAPPED_CHEST:
+                                        toberemoved.add(b);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            // Now delete them
+                            toberemoved.forEach((b) -> {
+                                e.getBlockList().remove(b);
+                            });
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+        } catch (Exception ex) {}
     }
 
     /**
