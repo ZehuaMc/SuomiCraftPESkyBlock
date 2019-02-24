@@ -140,6 +140,9 @@ public class IslandGuard implements Listener {
         if (island.getIgsFlag(flag) || island.getOwner().equalsIgnoreCase(player.getName())) {
             return true;
         }
+        if (!island.isLocked()) { // Locked is now same as protected
+            return true;
+        }
         return Settings.defaultWorldSettings.get(flag);
     }
 
@@ -161,7 +164,6 @@ public class IslandGuard implements Listener {
 
     @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     public void onVehicleMove(final VehicleMoveEvent e) {
-        deb.debug("vehicle move = " + e.getVehicle());
         if (!inWorld(e.getVehicle())) {
             return;
         }
@@ -196,7 +198,7 @@ public class IslandGuard implements Listener {
                 if (!islandTo.getMembers().contains(player.getName()) && !player.isOp()
                     && !player.hasPermission("is.mod.bypassprotect")
                     && !player.hasPermission("is.mod.bypasslock")) {
-                    player.sendMessage(plugin.getPrefix() + TextFormat.RED + "This island is locked");
+                    player.sendMessage(plugin.getPrefix() + TextFormat.RED + "This island is protected");
 
                     // Get the vector away from this island
                     Vector3 v = e.getVehicle().subtract(islandTo.getCenter()).normalize();
@@ -210,7 +212,7 @@ public class IslandGuard implements Listener {
         if (islandTo != null && islandFrom == null && (islandTo.getOwner() != null || islandTo.isSpawn())) {
             // Entering
             if (islandTo.isLocked()) {
-                player.sendMessage(plugin.getPrefix() + TextFormat.RED + "This island is locked");
+                player.sendMessage(plugin.getPrefix() + TextFormat.RED + "This island is protected");
             }
             if (islandTo.isSpawn()) {
                 if (islandTo.getIgsFlag(IslandData.SettingsFlag.ENTER_EXIT_MESSAGES)) {
@@ -1011,8 +1013,10 @@ public class IslandGuard implements Listener {
                 // Maybe in team or else
             } else {
                 // Visitor
-                e.getPlayer().sendMessage(plugin.getLocale(e.getPlayer()).islandProtected);
-                e.setCancelled(true);
+                if (island.isLocked()) { // Locked is now same as protected
+                    e.getPlayer().sendMessage(plugin.getLocale(e.getPlayer()).islandProtected);
+                    e.setCancelled(true);
+                }
             }
         }
     }
@@ -1262,12 +1266,6 @@ public class IslandGuard implements Listener {
         // Load player datatatatata tadaaaa
         if (plugin.getPlayerInfo(p) == null) {
             plugin.getDatabase().createPlayer(p.getName());
-        }
-        // Load messages
-        List<String> news = plugin.getMessages().getMessages(p.getName());
-
-        if (news != null && news.isEmpty()) {
-            p.sendMessage(plugin.getLocale(p).newNews.replace("[count]", Integer.toString(news.size())));
         }
     }
 }

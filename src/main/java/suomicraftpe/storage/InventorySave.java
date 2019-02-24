@@ -79,5 +79,4 @@ public class InventorySave {
             inventories.remove(player.getUniqueId());
         }
     }
-
 }

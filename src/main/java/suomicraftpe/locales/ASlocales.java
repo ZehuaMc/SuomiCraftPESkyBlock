@@ -103,9 +103,6 @@ public final class ASlocales {
     public String kickedFromOwner = "§eYou were kicked from island owned by [name].";
     public String kickedFromAdmin = "§eYou were kicked by Admin on duty.";
     public String kickedFromTeam = "§eYou were kicked from [name]'s team";
-    public String newsHeadline = "§aWhile you were §eOffline§a:";
-    public String newsEmpty = "§aThere no messages for you today. Check back later!";
-    public String newNews = "§eWelcome back! There's [count] news today! Use /is messages to see all messages";
     public String newInvitation = "§aNew invitation from [player]'s island";
     public String acceptedFrom = "§eYou accepted [player]'s invitation.";
     public String acceptedTo = "§e[player] has accepted your invitation!";

@@ -80,7 +80,7 @@ public class ASkyBlockEvent extends Event {
     }
 
     /**
-     * Convenience function to obtain the island's locked status
+     * Convenience function to obtain the island's protected status
      *
      * @return the isLocked
      */

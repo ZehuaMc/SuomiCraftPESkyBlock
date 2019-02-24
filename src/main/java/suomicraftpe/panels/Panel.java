@@ -348,7 +348,7 @@ public class Panel implements Listener {
         FormWindowCustom settingForm = new FormWindowCustom("" + pd.getName() + "'s Settings");
 
         settingForm.addElement(new ElementLabel(getLocale(p).panelSettingHeader));
-        settingForm.addElement(new ElementToggle("Locked", pd.isLocked()));
+        settingForm.addElement(new ElementToggle("Protection", pd.isLocked()));
         settingForm.addElement(new ElementInput("Island Name", "", pd.getName()));
         mapIslandId.put(p, pd.getId());
 

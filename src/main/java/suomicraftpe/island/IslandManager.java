@@ -99,9 +99,6 @@ public class IslandManager {
             pOwner.sendMessage(plugin.getPrefix() + plugin.getLocale(pOwner).errorOfflinePlayer);
             return;
         }
-        Utils.send("&cAn island owner, " + pOwner.getName() + " attempt to "
-            + "execute kick command to " + pVictim.getName() + " At "
-            + Utils.locationShorted(locVict));
         pOwner.sendMessage(plugin.getPrefix() + TextFormat.GREEN + "Success! You send " + TextFormat.YELLOW + victimName + TextFormat.GREEN + " to spawn!");
         pVictim.sendMessage(plugin.getPrefix() + plugin.getLocale(pVictim).kickedFromOwner.replace("[name]", pOwner.getName()));
         if (plugin.getDatabase().getSpawn() != null) {
@@ -150,7 +147,7 @@ public class IslandManager {
         return this.createIsland(p, templateId, home, plugin.getDefaultWorld(), false, Biome.getBiome(Biome.PLAINS));
     }
 
-    public boolean createIsland(Player p, int templateId, String levelName, String home, boolean locked, Biome biome) {
+    public boolean createIsland(Player p, int templateId, String levelName, String home, boolean protection, Biome biome) {
         if (Settings.useEconomy) {
             double money = ASkyBlock.econ.getMoney(p);
             if (Settings.islandCost < money || Settings.islandCost == money) {
@@ -176,7 +173,7 @@ public class IslandManager {
             if (pd == null) {
                 Level world = Server.getInstance().getLevelByName(levelName);
                 Location locIsland = new Location(wx, wy, wz, world);
-                pd = claim(p, locIsland, home, locked);
+                pd = claim(p, locIsland, home, protection);
                 IslandCreateEvent event = new IslandCreateEvent(p, templateId, pd);
                 plugin.getServer().getPluginManager().callEvent(event);
                 if (event.isCancelled()) {
@@ -322,7 +319,7 @@ public class IslandManager {
         }
         p.sendMessage(TextFormat.LIGHT_PURPLE + "- Members: " + TextFormat.AQUA + strMembers);
 
-        p.sendMessage(TextFormat.LIGHT_PURPLE + "- Flags: " + TextFormat.GOLD + "Allow Teleport: " + pd.isLocked());
+        p.sendMessage(TextFormat.LIGHT_PURPLE + "- Flags: " + TextFormat.GOLD + "Is Protected: " + pd.isLocked());
     }
 
     public void teleportPlayer(Player p, String arg) {
