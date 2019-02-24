@@ -166,7 +166,12 @@ public class Panel implements Listener {
                 FormResponseCustom settingResponse = secondTime.getResponse();
 
                 int idea = 1;
-                IslandData pd = plugin.getDatabase().getIsland(p.getName(), mapIslandId.get(p));
+                IslandData pd;
+                try { // Maybe figure out why this causes random exceptions later
+                    pd = plugin.getDatabase().getIsland(p.getName(), mapIslandId.get(p));
+                } catch(Exception e) {
+                    break;
+                }
 
                 boolean lock = settingResponse.getToggleResponse(idea++);
                 String nameIsland = settingResponse.getInputResponse(idea++);
