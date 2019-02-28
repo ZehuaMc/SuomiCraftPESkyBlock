@@ -175,15 +175,11 @@ public class Panel implements Listener {
 
                 boolean lock = settingResponse.getToggleResponse(idea++);
                 String nameIsland = settingResponse.getInputResponse(idea++);
-                Biome biome = Biome.getBiome(settingResponse.getDropdownResponse(idea++).getElementContent());
                 if (pd.isLocked() != lock) {
                     pd.setLocked(lock);
                 }
                 if (!pd.getName().equalsIgnoreCase(nameIsland)) {
                     pd.setName(nameIsland);
-                }
-                if (!pd.getBiome().equalsIgnoreCase(biome.getName())) {
-                    pd.setBiome(biome.getName());
                 }
                 break;
             case FIRST_TIME_DELETE:

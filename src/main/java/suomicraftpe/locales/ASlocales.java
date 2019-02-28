@@ -83,7 +83,6 @@ public final class ASlocales {
     public String setHomeSuccess = "§aSuccessfully changed island home location!";
     public String generalSuccess = "§aSuccess!";
     public String helpMessage = "§aNeed help? Use: /[com] help.";
-    public String biomeChangeComplete = "§aChanged your island biome to: [biome]";
     // Teleport messages
     public String teleportDelay = "§aYou will be teleported in {0} seconds.";
     public String teleportCancelled = "§cTeleport cancelled";
