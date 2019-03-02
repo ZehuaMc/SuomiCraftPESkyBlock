@@ -202,6 +202,7 @@ public class IslandData implements Cloneable {
         return false;
     }
 
+    @SuppressWarnings("rawtypes")
     public HashMap getIgsValues() {
         return igs;
     }

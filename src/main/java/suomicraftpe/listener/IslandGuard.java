@@ -301,6 +301,9 @@ public class IslandGuard implements Listener {
         }
         // Get island
         IslandData island = plugin.getGrid().getProtectedIslandAt(e.getPlayer().getLocation());
+        if (island != null && !island.isLocked()) { // Locked is now same as protected
+            return;
+        }
         // Check for disallowed clicked blocks
         if (e.getBlock() != null) {
             // Look along player's sight line to see if any blocks are fire
@@ -334,7 +337,6 @@ public class IslandGuard implements Listener {
                 // To catch at block iterator exceptions that can happen in the void or at the very top of blocks
                 deb.debug("DEBUG: block iterator error");
                 ex.printStackTrace();
-
             }
             // Handle Shulker Boxes
             if (e.getBlock().getName().contains("SHULKER_BOX")) {

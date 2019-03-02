@@ -1,6 +1,6 @@
 ---
 ## Game Prefix
-Prefix: "&d[&eASkyBlock&d] &e"
+Prefix: "&d[&eSkyBlock&d] &e"
 ## Max islands homes
 # You will have to set this as digit and will be used on island!
 maxhome: 1

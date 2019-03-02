@@ -114,6 +114,8 @@ public class Panel implements Listener {
 
                 if (!p.getLevel().getName().equals("SkyBlock")) return;
 
+                if (!((FormWindowSimple) event.getWindow()).getTitle().equals("Challenges Menu")) return;
+
                 FormWindowSimple panelChallenges = (FormWindowSimple) event.getWindow();
 
                 FormResponseSimple responses = panelChallenges.getResponse();
